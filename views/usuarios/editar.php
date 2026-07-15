@@ -1,9 +1,9 @@
 <?php
-session_start();
-if (!isset($_SESSION['user_id'])) {
-    header('Location: ../../index.php');
-    exit;
-}
+// session_start();
+// if (!isset($_SESSION['user_id'])) {
+//     header('Location: ../../index.php');
+//     exit;
+// }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -15,69 +15,116 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
-    <div class="dashboard-container">
-        <aside class="sidebar p-4">
-            <h2 class="fs-4 mb-4 fw-bold">Sistema</h2>
-            <ul class="list-unstyled m-0">
-                <li class="rounded mb-2"><a class="sidebar-link" href="../../dashboard.php">Inicio</a></li>
-                <li class="rounded mb-2 active"><a class="sidebar-link" href="index.php">Usuarios</a></li>
-                <li class="rounded mb-2"><a class="sidebar-link" href="#">Productos</a></li>
-                <li class="rounded mb-2"><a class="sidebar-link" href="#">Reportes</a></li>
-                <li class="rounded mb-2"><a class="sidebar-link" href="#">Configuración</a></li>
-            </ul>
-        </aside>
-
-        <main class="content d-flex flex-column">
-            <header class="toolbar bg-white p-3 d-flex justify-content-between align-items-center mb-4">
-                <h1 class="m-0 fs-3 fw-bold">Editar usuario</h1>
-                <a href="../../backend/logout.php" class="btn btn-primary rounded-3 px-3 py-1">Salir</a>
-            </header>
-
-            <div class="px-4 pb-5">
-                <div class="card-custom p-4 mx-auto form-card">
-                    <p class="text-muted">Los datos son de ejemplo. Esta vista todavía no actualiza la base de datos.</p>
-
-                    <form action="#" method="post">
-                        <div class="mb-3">
-                            <label for="nombre" class="form-label fw-semibold">Nombre completo</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" value="Alejandro Martínez" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="correo" class="form-label fw-semibold">Correo electrónico</label>
-                            <input type="email" class="form-control" id="correo" name="correo" value="alejandro@correo.com" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="telefono" class="form-label fw-semibold">Teléfono</label>
-                            <input type="text" class="form-control" id="telefono" name="telefono" value="8888-8888">
-                        </div>
-
-                        <div class="row g-3">
-                            <div class="col-12 col-md-6">
-                                <label for="rol" class="form-label fw-semibold">Rol</label>
-                                <select class="form-select" id="rol" name="rol">
-                                    <option selected>Cliente</option>
-                                    <option>Administrador</option>
-                                </select>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <label for="estado" class="form-label fw-semibold">Estado</label>
-                                <select class="form-select" id="estado" name="estado">
-                                    <option selected>Activo</option>
-                                    <option>Inactivo</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="d-flex justify-content-end gap-2 mt-4">
-                            <a href="index.php" class="btn btn-outline-secondary">Cancelar</a>
-                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                        </div>
-                    </form>
-                </div>
+   <body class="usuarios-body">
+    <!-- Barra superior -->
+    <header class="usuarios-topbar">
+        <a href="../../../dashboard.php"class="usuarios-brand">
+            <img src="../../../img/logo.jpg"alt="Logo de La Casa de la Placa"class="usuarios-logo">
+            <span>La Casa de la Placa</span>
+        </a>
+        <a href="../../../backend/logout.php"class="usuarios-logout"title="Cerrar sesión">
+            Salir
+        </a>
+    </header>
+    <!-- Contenido principal -->
+    <main class="usuarios-main">
+        <section class="usuarios-profile-header">
+            <div class="usuarios-icon">
+                ✎
             </div>
-        </main>
-    </div>
+            <h1>Editar usuario</h1>
+            <span class="usuarios-badge">
+                Panel administrativo
+            </span>
+        </section>
+        <section class="usuarios-card">
+            <div class="usuarios-card-title">
+
+                <h2>Información del usuario</h2>
+                <p>
+                    Modifique los datos del usuario seleccionado.
+                </p>
+            </div>
+            <div class="admin-demo-message">
+                Los datos son de ejemplo. Esta vista todavía no actualiza
+                la información en la base de datos.
+            </div>
+            <form action="#" method="post">
+                <div class="mb-3">
+                    <label for="nombre"class="form-label">
+                        Nombre completo
+                    </label>
+                    <input type="text"class="form-control"id="nombre"name="nombre"value="Alejandro Martínez"required>
+                </div>
+                <div class="mb-3">
+                    <label for="correo"class="form-label">
+                        Correo electrónico
+                    </label>
+                    <input type="email"class="form-control"id="correo"name="correo"value="alejandro@correo.com"required>
+                </div>
+                <div class="mb-3">
+                    <label for="telefono"class="form-label">
+                        Teléfono
+                    </label>
+                    <input type="tel"class="form-control"id="telefono"name="telefono"value="8888-8888">
+                </div>
+                <div class="row g-3">
+                    <div class="col-12 col-md-6">
+                        <label for="rol"class="form-label">
+                            Rol
+                        </label>
+                        <select class="form-select"id="rol"name="rol">
+                            <option selected>
+                                Cliente
+                            </option>
+                            <option>
+                                Administrador
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="estado"class="form-label">
+                            Estado
+                        </label>
+                        <select class="form-select"id="estado"name="estado">
+                            <option selected>
+                                Activo
+                            </option>
+                            <option>
+                                Inactivo
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="usuarios-actions">
+                    <a href="lista.php"class="btn usuarios-btn-secondary">
+                      Cancelar
+                    </a>
+                    <button type="submit"class="btn usuarios-btn-primary">
+                        Guardar cambios
+                    </button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <!-- Barra de navegación inferior -->
+    <nav class="usuarios-bottom-nav">
+        <a href="../../../dashboard.php">
+            <span></span>
+            <small>Inicio</small>
+        </a>
+        <a href="lista.php" class="active">
+            <span></span>
+            <small>Usuarios</small>
+        </a>
+        <a href="crear.php">
+            <span></span>
+            <small>Crear</small>
+        </a>
+        <a href="../../../perfil.php">
+            <span></span>
+            <small>Perfil</small>
+        </a>
+    </nav>
 </body>
 </html>
