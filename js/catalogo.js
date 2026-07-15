@@ -1,6 +1,4 @@
-// ==========================================================
-// LA CASA DE LA PLACA — Catálogo: búsqueda y filtros
-// ==========================================================
+
 
 document.addEventListener('DOMContentLoaded', function () {
 
