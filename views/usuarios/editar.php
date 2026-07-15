@@ -109,7 +109,7 @@ if (!isset($_SESSION['user_id'])) {
     </main>
     <!-- Barra de navegación inferior -->
     <nav class="usuarios-bottom-nav">
-        <a href="../../../dashboard.php">
+        <a href="">
             <span></span>
             <small>Inicio</small>
         </a>
@@ -121,7 +121,7 @@ if (!isset($_SESSION['user_id'])) {
             <span></span>
             <small>Crear</small>
         </a>
-        <a href="../../../perfil.php">
+        <a href="">
             <span></span>
             <small>Perfil</small>
         </a>
