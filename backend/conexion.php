@@ -1,16 +1,12 @@
 <?php
 
-// Datos para conectarse a la base de datos
-$host = 'localhost';
-$db = 'casa_placa';
-$user = 'root';
-$pass = 'Zeanne202507';
+require_once __DIR__ . '/config.php';
 
 // Usar PDO para conectarse a MySQL
 try {
 
     // Crear la conexión con la base de datos
-    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
+    $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8", DB_USER, DB_PASS);
 
     // Mostrar errores si ocurre algún problema
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -24,22 +20,3 @@ try {
     die();
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>
