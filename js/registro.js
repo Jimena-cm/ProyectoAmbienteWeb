@@ -1,69 +1,35 @@
 const form = document.querySelector("#frmRegistro");
 
+if (form) {
 
-if(form){
+    form.addEventListener("submit", function (e) {
 
+        e.preventDefault();
+        const datos = new FormData(form);
 
-form.addEventListener("submit", function(e){
+        fetch("./backend/registro.php", {
 
+            method: "POST",
+            body: datos
 
-e.preventDefault();
+        })
+            .then(response => response.json())
+            .then(resultado => {
+                const mensaje = document.querySelector("#msgRegistro");
 
+                if (resultado.success) {
 
+                    alert(resultado.message);
+                    window.location.href = "index.php";
 
-const datos = new FormData(form);
+                } else {
+                    mensaje.textContent = resultado.message;
 
+                }
+            })
+            .catch(error => {
+                console.log(error);
 
-
-fetch("./backend/registro.php",{
-
-method:"POST",
-
-body:datos
-
-})
-
-
-.then(response=>response.json())
-
-
-.then(resultado=>{
-
-
-const mensaje=document.querySelector("#msgRegistro");
-
-
-if(resultado.success){
-
-
-alert(resultado.message);
-
-
-window.location.href="index.php";
-
-
-}else{
-
-
-mensaje.textContent=resultado.message;
-
-
-}
-
-
-})
-
-
-.catch(error=>{
-
-
-console.log(error);
-
-
-});
-
-
-});
-
-
+            });
+    });
 }

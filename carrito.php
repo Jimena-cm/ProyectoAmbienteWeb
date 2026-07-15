@@ -37,7 +37,7 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reseñas</title>
+    <title>Carrito</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
@@ -124,7 +124,7 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="carrito.php">
+                        <a class="nav-link active" aria-current="page" href="carrito.php">
                             Carrito
                         </a>
                     </li>
@@ -182,188 +182,109 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
 
         </div>
     </nav>
-
-    <main class="reviews-page">
-
-        <section class="reviews-container">
-
-           
-            <div class="reviews-header">
-
-                <img
-                    src="./img/logo.jpg"
-                    alt="Logo de La Casa de la Placa"
-                    class="reviews-logo"
-                >
-
-                <span>OPINIONES DE NUESTROS CLIENTES</span>
-
-                <h1>Reseñas</h1>
-
-                <p>
-                    Conoce la experiencia de nuestros clientes
-                    y comparte también tu opinión.
-                </p>
-
+    <main class="cdp-page">
+        <section class="cdp-carrito">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIHWwyVSogX0PYkNxSFNOWEWXY5E4GiVmwXQySHbq_ciJbt6FrTJaAwrqK&s=10" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Acero Cepillado Moderno</h5>
+                            <p class="card-text">Placa en acero inoxidable cepillado, resistente a la intemperie. Acabado industrial elegante, recomendado para exteriores y placas identificativas duraderas.</p>
+                            <div class="cantidad-precio">
+                                <div class="cantidad-carrito">
+                                    <button class="btn-restar">-</button>
+                                    <span id="cantidad">1</span>
+                                    <button class="btn-aumentar">+</button>
+                                </div>
+                                <p class="precio">₡82 500</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-
-            <div class="reviews-grid">
-
-                
-                <section class="reviews-list-section">
-
-                    <div class="reviews-title">
-                        <h2>Lo que dicen nuestros clientes</h2>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIHWwyVSogX0PYkNxSFNOWEWXY5E4GiVmwXQySHbq_ciJbt6FrTJaAwrqK&s=10" class="img-fluid rounded-start" alt="...">
                     </div>
-
-                    <div id="listaResenas">
-
-                        <p class="text-muted">
-                            Cargando reseñas...
-                        </p>
-
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Cristal Esmerilado Pro</h5>
+                            <p class="card-text">Placa en vidrio esmerilado con grabado interno de alta definición. Un estilo moderno y minimalista, ideal para espacios corporativos contemporáneos.</p>
+                            <div class="cantidad-precio">
+                                <div class="cantidad-carrito">
+                                    <button class="btn-restar">-</button>
+                                    <span id="cantidad">1</span>
+                                    <button class="btn-aumentar">+</button>
+                                </div>
+                                <p class="precio">₡105 000</p>
+                            </div>
+                        </div>
                     </div>
-
-                </section>
-
-
-                <!-- forms -->
-                <aside class="review-form-card">
-
-                    <h2>Comparte tu experiencia</h2>
-
-                    <p>
-                        Tu opinión nos ayuda a seguir mejorando.
-                    </p>
-
-                    <form id="frmResena">
-
-                        <div class="mb-3">
-
-                            <label
-                                for="nombre"
-                                class="form-label"
-                            >
-                                Nombre
-                            </label>
-
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="nombre"
-                                name="nombre"
-                                placeholder="Tu nombre"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="mb-3">
-
-                            <label
-                                for="calificacion"
-                                class="form-label"
-                            >
-                                Calificación
-                            </label>
-
-                            <select
-                                class="form-select"
-                                id="calificacion"
-                                name="calificacion"
-                                required
-                            >
-
-                                <option value="">
-                                    Selecciona una calificación
-                                </option>
-
-                                <option value="5">
-                                    ★★★★★ Excelente
-                                </option>
-
-                                <option value="4">
-                                    ★★★★☆ Muy buena
-                                </option>
-
-                                <option value="3">
-                                    ★★★☆☆ Buena
-                                </option>
-
-                                <option value="2">
-                                    ★★☆☆☆ Regular
-                                </option>
-
-                                <option value="1">
-                                    ★☆☆☆☆ Mala
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="mb-3">
-
-                            <label
-                                for="comentario"
-                                class="form-label"
-                            >
-                                Comentario
-                            </label>
-
-                            <textarea
-                                class="form-control"
-                                id="comentario"
-                                name="comentario"
-                                rows="5"
-                                placeholder="Cuéntanos sobre tu experiencia"
-                                required
-                            ></textarea>
-
-                        </div>
-
-
-                        <div
-                            id="msgResena"
-                            class="mb-3"
-                        ></div>
-
-
-                        <button
-                            type="submit"
-                            class="btn btn-primary w-100 p-2"
-                        >
-                            PUBLICAR RESEÑA
-                        </button>
-
-                    </form>
-
-                </aside>
-
-            </div>
-
-
-            <div class="text-center mt-4">
-
-                <a
-                    href="dashboard.php"
-                    class="reviews-back"
-                >
-                     Volver al panel
-                </a>
-
+                </div>
             </div>
 
         </section>
 
+        <section class="cpd-pago">
+            <div class="cdp-total">
+                <div class="card mb-3" id="card-total">
+                    <div class="row g-0">
+                        <div class="card-body">
+                            <div class="precio-pagar">
+                                <span>Subtotal:</span>
+                                <span>₡187 500</span>
+                            </div>
+                            <div class="precio-pagar">
+                                <span>Impuestos:</span>
+                                <span>₡2 000</span>
+                            </div>
+                            <div class="total-precio">
+                                <span class="total">Total:</span>
+                                <span class="total">₡189 500</span>
+                            </div>
+                            <div class="container-btn">
+                                <button class="btn-total">PAGAR</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
     </main>
+    <footer class="cdp-footer">
+        <div class="container py-5">
 
+            <div class="cdp-footer-brand text-center">
+                <p class="cdp-footer-copy">COPYRIGHT © 2026 LA CASA DE LA PLACA</p>
+                <p class="cdp-footer-tagline">Placas que conservan la memoria.</p>
+            </div>
 
-    <script src="./js/resenas.js"></script>
+            <!-- NOTA: reemplaza estos enlaces por las redes reales del negocio -->
+            <div class="cdp-footer-social mb-2 text-center">
+                <a href="https://www.facebook.com/share/1L1eFBMFed/" class="cdp-social-btn text-decoration-none" aria-label="Facebook">
+                    <i class="bi bi-facebook"></i>
+                </a>
+                <a href="https://www.instagram.com/lacasadelaplaca?igsh=MTg2ZHVrM3FrZ2Z4cg==" class="cdp-social-btn text-decoration-none" aria-label="Instagram">
+                    <i class="bi bi-instagram"></i>
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=50664160187" class="cdp-social-btn text-decoration-none" aria-label="Whatsapp">
+                    <i class="bi bi-whatsapp"></i>
+                </a>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="./js/catalogo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

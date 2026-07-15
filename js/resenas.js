@@ -9,29 +9,22 @@ document.addEventListener("DOMContentLoaded", function () {
     const msgResena =
         document.querySelector("#msgResena");
 
-
     function cargarResenas() {
 
         fetch("./backend/resenas.php")
-
             .then(response => response.json())
-
             .then(resultado => {
 
                 if (!resultado.success) {
-
                     listaResenas.innerHTML = `
                         <div class="alert alert-danger">
                             ${resultado.message}
                         </div>
                     `;
-
                     return;
                 }
 
-
                 const resenas = resultado.resenas;
-
 
                 if (resenas.length === 0) {
 
@@ -44,21 +37,16 @@ document.addEventListener("DOMContentLoaded", function () {
                             </p>
                         </div>
                     `;
-
                     return;
                 }
 
-
                 let html = "";
 
-
                 resenas.forEach(resena => {
-
                     const estrellas =
                         "★".repeat(resena.calificacion)
                         +
                         "☆".repeat(5 - resena.calificacion);
-
 
                     html += `
 
@@ -68,39 +56,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
                                 <div class="review-avatar">
 
-                                    ${resena.nombre
-                                        .charAt(0)
-                                        .toUpperCase()}
+                                    ${resena.nombre.charAt(0).toUpperCase()}
 
                                 </div>
-
                                 <div>
-
                                     <h3>
                                         ${resena.nombre}
                                     </h3>
 
                                     <div class="review-stars">
-
                                         ${estrellas}
-
                                     </div>
-
+                                
                                 </div>
-
                             </div>
 
-
                             <p class="review-comment">
-
                                 ${resena.comentario}
-
                             </p>
-
-                        </article>
-
-                    `;
-
+                        </article>`;
                 });
 
 
@@ -142,44 +116,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
             })
 
-            .then(response => response.json())
+                .then(response => response.json())
 
-            .then(resultado => {
+                .then(resultado => {
 
-                msgResena.textContent =
-                    resultado.message;
+                    msgResena.textContent =
+                        resultado.message;
 
 
-                if (resultado.success) {
+                    if (resultado.success) {
 
-                    msgResena.className =
-                        "alert alert-success";
+                        msgResena.className =
+                            "alert alert-success";
 
-                    formResena.reset();
+                        formResena.reset();
 
-                    cargarResenas();
+                        cargarResenas();
 
-                } else {
+                    } else {
+
+                        msgResena.className =
+                            "alert alert-danger";
+                    }
+
+                })
+
+                .catch(error => {
+
+                    console.log("Error:", error);
+
+
+                    msgResena.textContent =
+                        "Error al publicar la reseña.";
+
 
                     msgResena.className =
                         "alert alert-danger";
-                }
 
-            })
-
-            .catch(error => {
-
-                console.log("Error:", error);
-
-
-                msgResena.textContent =
-                    "Error al publicar la reseña.";
-
-
-                msgResena.className =
-                    "alert alert-danger";
-
-            });
+                });
 
         }
     );

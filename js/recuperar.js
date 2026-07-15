@@ -2,7 +2,7 @@ const formRecuperar = document.querySelector("#frmRecuperar");
 
 if (formRecuperar) {
 
-    formRecuperar.addEventListener("submit", function(event) {
+    formRecuperar.addEventListener("submit", function (event) {
 
         event.preventDefault();
 
@@ -18,7 +18,7 @@ if (formRecuperar) {
         mensaje.textContent = "";
         mensaje.className = "d-block mb-3";
 
-        
+
         if (password !== confirmPassword) {
 
             mensaje.textContent =
@@ -39,46 +39,46 @@ if (formRecuperar) {
 
         })
 
-        .then(response => response.json())
+            .then(response => response.json())
 
-        .then(resultado => {
+            .then(resultado => {
 
-            if (resultado.success) {
+                if (resultado.success) {
+
+                    mensaje.textContent =
+                        resultado.message;
+
+                    mensaje.classList.add("text-success");
+
+                    setTimeout(() => {
+
+                        window.location.href =
+                            "index.php";
+
+                    }, 1500);
+
+                } else {
+
+                    mensaje.textContent =
+                        resultado.message;
+
+                    mensaje.classList.add("text-danger");
+                }
+
+            })
+
+            .catch(error => {
+
+                console.log(
+                    "Error:",
+                    error
+                );
 
                 mensaje.textContent =
-                    resultado.message;
-
-                mensaje.classList.add("text-success");
-
-                setTimeout(() => {
-
-                    window.location.href =
-                        "index.php";
-
-                }, 1500);
-
-            } else {
-
-                mensaje.textContent =
-                    resultado.message;
+                    "Error al comunicarse con el servidor.";
 
                 mensaje.classList.add("text-danger");
-            }
-
-        })
-
-        .catch(error => {
-
-            console.log(
-                "Error:",
-                error
-            );
-
-            mensaje.textContent =
-                "Error al comunicarse con el servidor.";
-
-            mensaje.classList.add("text-danger");
-        });
+            });
 
     });
 

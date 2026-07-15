@@ -42,10 +42,8 @@ body {
     min-height: 100vh;
 
     background-image:
-        linear-gradient(
-            rgba(26, 43, 60, 0.42),
-            rgba(26, 43, 60, 0.42)
-        ),
+        linear-gradient(rgba(26, 43, 60, 0.42),
+            rgba(26, 43, 60, 0.42)),
         url("../img/casa-placa.avif");
 
     background-size: cover;
@@ -954,7 +952,7 @@ body {
     margin-bottom: 8px;
 }
 
-.contact-form-card > p {
+.contact-form-card>p {
     color: #6C757D;
 
     margin-bottom: 30px;
@@ -1104,8 +1102,7 @@ body {
     display: grid;
 
     grid-template-columns:
-        0.8fr
-        1.4fr;
+        0.8fr 1.4fr;
 
     border-radius: 20px;
 
@@ -1305,8 +1302,7 @@ body {
     display: grid;
 
     grid-template-columns:
-        1.35fr
-        0.65fr;
+        1.35fr 0.65fr;
 
     gap: 30px;
 
@@ -1445,7 +1441,7 @@ body {
     margin-bottom: 8px;
 }
 
-.review-form-card > p {
+.review-form-card>p {
     color: #D8DEE4;
 
     margin-bottom: 25px;
@@ -2082,6 +2078,7 @@ body {
         font-size: 12px;
     }
 }
+
 /* =========================================
    INICIO (HERO / SERVICIOS / HISTORIA)
 ========================================= */
@@ -2139,12 +2136,12 @@ body {
     justify-content: center;
     text-align: center;
     background:
-        radial-gradient(120% 140% at 50% 0%, rgba(255,255,255,0.05), transparent 55%),
+        radial-gradient(120% 140% at 50% 0%, rgba(255, 255, 255, 0.05), transparent 55%),
         linear-gradient(155deg, #2c2c2b 0%, #1a1a19 55%, #0f0f0e 100%);
     box-shadow:
         inset 0 0 0 1px rgba(212, 175, 55, 0.35),
-        inset 0 0 40px rgba(0,0,0,0.55),
-        0 18px 40px rgba(0,0,0,0.45);
+        inset 0 0 40px rgba(0, 0, 0, 0.55),
+        0 18px 40px rgba(0, 0, 0, 0.45);
     overflow: hidden;
 }
 
@@ -2177,7 +2174,7 @@ body {
     font-weight: 700;
     font-size: clamp(1.4rem, 3vw, 1.9rem);
     color: #E8C96B;
-    text-shadow: 0 1px 0 rgba(0,0,0,0.6), 0 0 18px rgba(232,201,107,0.18);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6), 0 0 18px rgba(232, 201, 107, 0.18);
     letter-spacing: 0.02em;
     margin-bottom: 0.35rem;
 }
@@ -2185,7 +2182,7 @@ body {
 .cdp-plaque-dates {
     font-size: 0.85rem;
     letter-spacing: 0.12em;
-    color: rgba(248,249,250,0.65);
+    color: rgba(248, 249, 250, 0.65);
     text-transform: uppercase;
     margin-bottom: 1rem;
 }
@@ -2195,7 +2192,7 @@ body {
     font-style: italic;
     font-size: 1.05rem;
     line-height: 1.6;
-    color: rgba(248,249,250,0.88);
+    color: rgba(248, 249, 250, 0.88);
     max-width: 480px;
 }
 
@@ -2389,23 +2386,38 @@ body {
 }
 
 .cdp-historia-texto p {
-    color: rgba(248,249,250,0.85);
+    color: rgba(248, 249, 250, 0.85);
     line-height: 1.85;
     font-size: 1.02rem;
     margin-bottom: 0;
 }
 
 @keyframes cdpFadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes cdpFadeLeft {
-    from { opacity: 0; transform: translateX(24px); }
-    to   { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     .cdp-servicio-card,
     .cdp-historia-texto {
         animation: none !important;
@@ -2416,9 +2428,19 @@ body {
 }
 
 @media (max-width: 767.98px) {
-    .cdp-plaque { padding: 2.5rem 1.25rem; min-height: 300px; }
-    .cdp-historia-inner { flex-direction: column; }
-    .cdp-historia-marca, .cdp-historia-texto { padding: 2.5rem 1.5rem; }
+    .cdp-plaque {
+        padding: 2.5rem 1.25rem;
+        min-height: 300px;
+    }
+
+    .cdp-historia-inner {
+        flex-direction: column;
+    }
+
+    .cdp-historia-marca,
+    .cdp-historia-texto {
+        padding: 2.5rem 1.5rem;
+    }
 }
 
 
@@ -2899,7 +2921,7 @@ body {
     gap: 14px;
 }
 
-.usuarios-topbar-user > span {
+.usuarios-topbar-user>span {
     color: #475569;
     font-size: 13px;
     font-weight: 700;
@@ -3148,7 +3170,7 @@ body {
 
 @media (max-width: 768px) {
 
-    .usuarios-topbar-user > span {
+    .usuarios-topbar-user>span {
         display: none;
     }
 
@@ -3279,3 +3301,176 @@ body {
         min-height: auto;
     }
 }
+
+/* --------------------------------CARRITO-------------------------------- */
+.cdp-carrito {
+    display: flex;
+    justify-content: row;
+    align-items: center;
+    padding: 20px 0 30px 0;
+    font-family: Arial, Helvetica, sans-serif;
+    flex-direction: column;
+}
+
+.card {
+    border-radius: 20px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding: 15px 0 15px 15px;
+}
+
+
+.cdp-carrito h5 {
+    font-weight: bold;
+}
+
+.precio {
+    font-weight: bold;
+    font-size: 18px;
+    padding-top: 20px;
+}
+
+.cantidad-carrito {
+    display: inline-flex;
+    align-items: center;
+    background-color: #10253f;
+    border-radius: 25px;
+    padding: 5px 5px;
+    gap: 20px;
+}
+
+.cantidad-carrito button {
+    border: none;
+    background: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.cantidad-carrito span {
+    font-size: 15px;
+    color: #fff;
+}
+
+.cantidad-precio {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.card-text {
+    margin: 0;
+}
+
+.cdp-total {
+    display: flex;
+    justify-content: row;
+    align-items: center;
+    padding: 20px 0 30px 0;
+    font-family: Arial, Helvetica, sans-serif;
+    flex-direction: column;
+}
+
+#card-total {
+    border-radius: 20px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    width: 700px;
+}
+
+.precio-pagar,
+.total-precio {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.precio-pagar span {
+    font-size: 20px;
+    padding: 5px 0 10px 0;
+}
+
+.total {
+    font-size: 25px;
+    font-weight: bold;
+    padding: 15px 0;
+
+}
+
+.container-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 5px;
+}
+
+.btn-total {
+    background-color: #10253f;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    width: 80%;
+    transition: 0.3s;
+}
+
+.btn-total:hover {
+    background-color: #1d3b61;
+}
+
+.frm-disenar {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0 20px 20px;
+}
+
+.frm-disenar label {
+    font-weight: bold;
+    padding: 10px 0 0 10px;
+    font-size: 18px;
+}
+
+.frm-disenar select, .frm-disenar textarea {
+    padding: 10px 0 10px 10px;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.frm-disenar select {
+    width: 100%;
+}
+
+.frm-disenar textarea {
+    width: 100%;
+    min-height: 80px;
+    resize: vertical;
+}
+
+.imagen-placa {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  padding: 15px 15px 0 15px;
+  padding-right: 25px;  
+}
+
+.card-body h3, .titulo{
+    text-align: center;
+    font-weight: bold;
+}
+
+.cdp-disenar{
+    padding: 20px 25px;
+}
+
+.titulo{
+    padding-top: 25px;
+}
+
