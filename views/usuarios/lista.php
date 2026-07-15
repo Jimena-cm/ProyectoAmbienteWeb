@@ -1,9 +1,9 @@
 <?php
-// session_start();
-// if (!isset($_SESSION['user_id'])) {
-//     header('Location: ../../index.php');
-//     exit;
-// }
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../../index.php');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -144,7 +144,7 @@
                             </td>
                             <td>
                                 <div class="usuarios-table-actions">
-                                    <a href="ver.phpclass="btn usuarios-action-view">
+                                    <a href="ver.php "class="btn usuarios-action-view">
                                         Ver
                                     </a>
                                     <a href="editar.php"class="btn usuarios-action-edit">
