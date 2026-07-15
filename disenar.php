@@ -187,9 +187,11 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
         <section class="cdp-disenar">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="card">
+                    <div class="card" id="disenar-card">
+                        <h3 class="titulo-disenar">Diseñe su Placa</h3>
+                    </div>
+                    <div class="card" id="disenar-card">
                         <div class="form-disenar">
-                            <h3 class="titulo">Diseñe su Placa</h3>
                             <form class="frm-disenar">
                                 <label class="categorias">Categorías: </label>
                                 <select id="categorias">
@@ -199,6 +201,12 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
                                     <option value="acrílico">Acrílico - ₡20 000</option>
                                     <option value="aluminio">Aluminio - ₡25 000</option>
                                 </select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card" id="disenar-card">
+                        <div class="form-disenar">
+                            <form class="frm-disenar">
                                 <label class="tamano">Tamaños: </label>
                                 <select id="tamano">
                                     <option value="seleccionar">---Seleccionar---</option>
@@ -207,8 +215,22 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
                                     <option value="tamano3">30x30 - ₡35 000</option>
                                     <option value="tamano4">30x40 - ₡45 000</option>
                                 </select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card" id="disenar-card">
+                        <div class="form-disenar">
+                            <form class="frm-disenar">
                                 <label class="mensaje">Mensaje: </label>
                                 <textarea class="texto-placa" placeholder="Ingrese su mensaje."></textarea>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card" id="disenar-card">
+                        <div class="form-disenar">
+                            <form class="frm-disenar">
+                                <label class="imagen">Imagen: </label>
+                                <input class="file-disenar" type="file">
                             </form>
                         </div>
                     </div>
@@ -246,7 +268,7 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
                             </div>
 
                             <div class="container-btn">
-                                <button class="btn-total">Añadir al Carrito</button>                                
+                                <button class="btn-total">Añadir al Carrito</button>
                             </div>
                         </div>
                     </div>

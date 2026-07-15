@@ -3474,3 +3474,18 @@ body {
     padding-top: 25px;
 }
 
+#disenar-card{
+    margin: 20px;
+}
+
+.titulo-disenar{
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.file-disenar{
+    border: 1px solid;
+    border-radius: 10px;
+    cursor: pointer;
+}
