@@ -1,10 +1,13 @@
 <?php
-session_start();
-if (!isset($_SESSION['user_id'])) {
-    header('Location: ../../index.php');
-    exit;
-}
+// session_start();
+// if (!isset($_SESSION['user_id'])) {
+//     header('Location: ../../index.php');
+//     exit;
+// }
 ?>
+
+<!-- Para ver la pagina ya que no hay nada que pueda acceder esto seria " http://localhost/ProyectoAmbienteWeb/public/user/index " -->
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,20 +15,20 @@ if (!isset($_SESSION['user_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de usuarios</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="/ProyectoAmbienteWeb/public/css/style.css">
 </head>
 <body class="usuarios-body">
     <!-- Barra superior -->
     <header class="usuarios-topbar">
-        <a href="../../../dashboard.php"class="usuarios-brand">
-            <img src="../../../img/logo.jpg"alt="Logo de La Casa de la Placa"class="usuarios-logo">
+        <a href="/ProyectoAmbienteWeb/public/dashboard.php"class="usuarios-brand">
+            <img src="/ProyectoAmbienteWeb/Public/img/logo.jpg"alt="Logo de La Casa de la Placa"class="usuarios-logo">
             <span>La Casa de la Placa</span>
         </a>
         <div class="usuarios-topbar-user">
             <span>
                 <?= htmlspecialchars($_SESSION['user_name'] ?? 'Administrador') ?>
             </span>
-            <a href="../../../backend/logout.php"class="usuarios-logout">
+            <a href="/ProyectoAmbienteWeb/backend/logout.php"class="usuarios-logout">
                 Salir
             </a>
         </div>

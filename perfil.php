@@ -1,8 +1,12 @@
 <?php
 session_start();
 
-require_once "./backend/conexion.php";
+if (!isset($_SESSION["user_id"])) {
+    header("Location: /ProyectoAmbienteWeb/public/auth/index");
+    exit;
+}
 
+require_once __DIR__ . "/backend/conexion.php";
 
 $stmt = $pdo->prepare(
     "SELECT profile_image
@@ -16,16 +20,12 @@ $stmt->execute([
 
 $usuarioActual = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
-$fotoPerfil = $usuarioActual["profile_image"] ?? "";
-
+$fotoPerfil = $usuarioActual["profile_image"] ?? "usuario.jpg";
 
 if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
-
-    $rutaFoto = "./img/usuario.jpg";
+    $rutaFoto = "/ProyectoAmbienteWeb/public/img/usuario.jpg";
 } else {
-
-    $rutaFoto = "./uploads/" . $fotoPerfil;
+    $rutaFoto = "/ProyectoAmbienteWeb/uploads/" . $fotoPerfil;
 }
 
 ?>
@@ -40,7 +40,7 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
     <title>Mi perfil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="/ProyectoAmbienteWeb/public/css/style.css">
 </head>
 
 <body class="home-body">
@@ -49,7 +49,7 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
         <div class="container-fluid">
 
             <a class="navbar-brand d-flex align-items-center gap-2" href="dashboard.php">
-                <img src="./img/logo.jpg" alt="Logo de La Casa de la Placa" class="navbar-logo">
+                <img src="public/img/logo.jpg" alt="Logo de La Casa de la Placa" class="navbar-logo">
                 <span>
                     LA CASA DE LA PLACA
                 </span>
@@ -135,7 +135,7 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
                         <a class="nav-link dropdown-toggle cuenta-menu" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
 
-                            <img src="<?= htmlspecialchars($rutaFoto) ?>" alt="Foto del usuario" class="cuenta-imagen">
+                            <img src="public/img/usuario.jpg" alt="Foto del usuario" class="cuenta-imagen">
 
                             <span class="cuenta-info">
                                 <small>
@@ -155,12 +155,6 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
                             </li>
 
                             <li>
-                                <a class="dropdown-item" href="historial.php">
-                                    Mis pedidos
-                                </a>
-                            </li>
-
-                            <li>
                                 <a class="dropdown-item" href="contacto.php">
                                     Atención al cliente
                                 </a>
@@ -171,7 +165,7 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
                             </li>
 
                             <li>
-                                <a class="dropdown-item text-danger" href="backend/logout.php">
+                                <a class="dropdown-item text-danger" href="/ProyectoAmbienteWeb/public/auth/logout">
                                     Cerrar sesión
                                 </a>
                             </li>
@@ -193,7 +187,7 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
             <section class="account-header">
 
                 <img
-                    src="./img/usuario.jpg"
+                    src="public/img/usuario.jpg"
                     alt="Foto de perfil"
                     id="profileMainImage"
                     class="account-profile-image"
@@ -391,7 +385,7 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
                     <div class="profile-image-section">
 
                         <img
-                            src="./img/usuario.jpg"
+                            src="public/img/usuario.jpg"
                             alt="Foto de perfil"
                             id="profilePreview"
                             class="profile-user-image"

@@ -22,11 +22,11 @@ $fotoPerfil = $usuarioActual["profile_image"] ?? "";
 
 if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
 
-    $rutaFoto = "./img/usuario.jpg";
+    $rutaFoto = "public/img/usuario.jpg";
 
 } else {
 
-    $rutaFoto = "./uploads/" . $fotoPerfil;
+    $rutaFoto = "public/uploads/" . $fotoPerfil;
 
 }
 
@@ -42,7 +42,7 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
     <title>Contacto</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="/ProyectoAmbienteWeb/public/css/style.css">
 </head>
 
 <body class="home-body">
@@ -51,7 +51,7 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
         <div class="container-fluid">
 
             <a class="navbar-brand d-flex align-items-center gap-2" href="dashboard.php">
-                <img src="./img/logo.jpg" alt="Logo de La Casa de la Placa" class="navbar-logo">
+                <img src="public/img/logo.jpg" alt="Logo de La Casa de la Placa" class="navbar-logo">
                 <span>
                     LA CASA DE LA PLACA
                 </span>
@@ -138,7 +138,7 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
                         <a class="nav-link dropdown-toggle cuenta-menu" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
 
-                            <img src="<?= htmlspecialchars($rutaFoto) ?>" alt="Foto del usuario" class="cuenta-imagen">
+                            <img src="public/img/usuario.jpg" alt="Foto del usuario" class="cuenta-imagen">
 
                             <span class="cuenta-info">
                                 <small>
@@ -154,12 +154,6 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
                             <li>
                                 <a class="dropdown-item" href="perfil.php">
                                     Información de mi cuenta
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item" href="historial.php">
-                                    Mis pedidos
                                 </a>
                             </li>
 
@@ -193,7 +187,7 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
             
             <div class="contact-header">
                 <img
-                    src="./img/logo.jpg"
+                    src="public/img/logo.jpg"
                     alt="Logo de La Casa de la Placa"
                     class="contact-logo"
                 >

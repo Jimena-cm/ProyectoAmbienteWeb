@@ -14,7 +14,7 @@
     >
 
     
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="/ProyectoAmbienteWeb/public/css/style.css">
 </head>
 
 <body class="login-body">
@@ -24,7 +24,7 @@
        
         <div class="login-logo-container">
             <img
-                src="./img/logo.jpg"
+                src="public/img/logo.jpg"
                 alt="Logo de La Casa de la Placa"
                 class="login-logo"
             >

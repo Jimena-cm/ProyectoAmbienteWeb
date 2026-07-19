@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -23,7 +23,7 @@
        
         <div class="login-logo-container">
             <img
-                src="public/img/logo.jpg"
+                src="/ProyectoAmbienteWeb/public/img/logo.jpg"
                 alt="Logo de La Casa de la Placa"
                 class="login-logo"
             >
@@ -37,7 +37,11 @@
         </div>
 
         
-        <form id="frmLogin">
+        <form id="frmLogin"
+        id="frmLogin"
+        action="/ProyectoAmbienteWeb/public/auth/login"
+        method="POST"
+        >
 
             
             <div class="mb-3">
@@ -133,4 +137,4 @@
 
 </body>
 
-</html> -->
+</html>
