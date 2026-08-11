@@ -1,7 +1,7 @@
 <?php
 require_once '../app/config/Database.php';
 
-class Contacto {
+class Cuenta {
     private $db;
 
     public function __construct() {
@@ -9,21 +9,25 @@ class Contacto {
     }
 
     public function getAll() {
-        $query = "SELECT * FROM contacto ORDER BY id DESC";
+        $query = "SELECT c.*, u.name AS usuario, u.email
+                  FROM cuenta c
+                  JOIN users u ON c.user_id = u.id
+                  ORDER BY c.id DESC";
+
         $result = $this->db->query($query);
-        $contactos = [];
+        $cuentas = [];
 
         if ($result && $result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $contactos[] = $row;
+                $cuentas[] = $row;
             }
         }
 
-        return $contactos;
+        return $cuentas;
     }
 
     public function getById($id) {
-        $query = "SELECT * FROM contacto WHERE id = ?";
+        $query = "SELECT * FROM cuenta WHERE id = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -34,16 +38,16 @@ class Contacto {
     }
 
     public function create($data) {
-        $query = "INSERT INTO contacto (nombre, email, mensaje)
+        $query = "INSERT INTO cuenta (ubicacion, genero, user_id)
                   VALUES (?, ?, ?)";
 
         $stmt = $this->db->prepare($query);
 
         $stmt->bind_param(
-            "sss",
-            $data['nombre'],
-            $data['email'],
-            $data['mensaje']
+            "ssi",
+            $data['ubicacion'],
+            $data['genero'],
+            $data['user_id']
         );
 
         if($stmt->execute()) {
@@ -54,17 +58,17 @@ class Contacto {
     }
 
     public function update($id, $data) {
-        $query = "UPDATE contacto
-                  SET nombre = ?, email = ?, mensaje = ?
+        $query = "UPDATE cuenta
+                  SET ubicacion = ?, genero = ?, user_id = ?
                   WHERE id = ?";
 
         $stmt = $this->db->prepare($query);
 
         $stmt->bind_param(
-            "sssi",
-            $data['nombre'],
-            $data['email'],
-            $data['mensaje'],
+            "ssii",
+            $data['ubicacion'],
+            $data['genero'],
+            $data['user_id'],
             $id
         );
 
@@ -72,7 +76,7 @@ class Contacto {
     }
 
     public function delete($id) {
-        $query = "DELETE FROM contacto WHERE id = ?";
+        $query = "DELETE FROM cuenta WHERE id = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $id);
 

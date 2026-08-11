@@ -1,20 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('contacto.js loaded');
+    console.log('soporte.js loaded');
 
-    loadContactos();
+    loadSoporte();
 
-    const btnNuevoContacto = document.getElementById('btnNuevoContacto');
-    const modal = document.getElementById('contactoModal');
+    const btnNuevoSoporte = document.getElementById('btnNuevoSoporte');
+    const modal = document.getElementById('soporteModal');
     const closeModal = document.getElementById('closeModal');
-    const contactoForm = document.getElementById('contactoForm');
+    const soporteForm = document.getElementById('soporteForm');
     const modalTitle = document.getElementById('modalTitle');
 
-    btnNuevoContacto.addEventListener('click', () => {
-        modalTitle.textContent = 'Nuevo Mensaje';
+    btnNuevoSoporte.addEventListener('click', () => {
+        modalTitle.textContent = 'Nueva Solicitud';
 
-        contactoForm.reset();
+        soporteForm.reset();
 
-        document.getElementById('contactoId').value = '';
+        document.getElementById('soporteId').value = '';
 
         modal.classList.add('active');
     });
@@ -24,23 +24,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    contactoForm.addEventListener('submit', async (e) => {
+    soporteForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const id = document.getElementById('contactoId').value;
-        const nombre = document.getElementById('contactoNombre').value;
-        const email = document.getElementById('contactoEmail').value;
-        const mensaje = document.getElementById('contactoMensaje').value;
+        const id = document.getElementById('soporteId').value;
+        const nombre_completo = document.getElementById('soporteNombre').value;
+        const telefono = document.getElementById('soporteTelefono').value;
+        const correo = document.getElementById('soporteCorreo').value;
+        const mensaje_soporte = document.getElementById('soporteMensaje').value;
 
         const data = {
-            nombre,
-            email,
-            mensaje
+            nombre_completo,
+            telefono,
+            correo,
+            mensaje_soporte
         };
 
         const url = id
-            ? `${BASE_URL}contacto/apiUpdate/${id}`
-            : `${BASE_URL}contacto/apiStore`;
+            ? `${BASE_URL}soporte/apiUpdate/${id}`
+            : `${BASE_URL}soporte/apiStore`;
 
         const btnSave = document.getElementById('btnSave');
         const originalText = btnSave.textContent;
@@ -70,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     'success'
                 );
 
-                loadContactos();
+                loadSoporte();
 
             }else{
 
@@ -100,11 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-async function loadContactos() {
+async function loadSoporte() {
 
     const loader = document.getElementById('tableLoader');
-    const table = document.getElementById('contactoTable');
-    const tbody = document.getElementById('contactoTbody');
+    const table = document.getElementById('soporteTable');
+    const tbody = document.getElementById('soporteTbody');
 
     loader.classList.remove('hidden');
     table.classList.add('hidden');
@@ -113,44 +115,44 @@ async function loadContactos() {
 
     try {
 
-        const response = await fetch(`${BASE_URL}contacto/apiList`);
-        const contactos = await response.json();
+        const response = await fetch(`${BASE_URL}soporte/apiList`);
+        const soportes = await response.json();
 
-        if(contactos.length === 0){
+        if(soportes.length === 0){
 
             tbody.innerHTML = `
                 <tr>
                     <td colspan="6" class="text-center text-muted">
-                        No hay mensajes de contacto registrados
+                        No hay solicitudes de soporte registradas
                     </td>
                 </tr>
             `;
 
         }else{
 
-            contactos.forEach(contacto => {
+            soportes.forEach(soporte => {
 
                 const tr = document.createElement('tr');
 
                 tr.innerHTML = `
-                    <td>${contacto.id}</td>
-                    <td>${contacto.nombre}</td>
-                    <td>${contacto.email}</td>
-                    <td>${contacto.mensaje}</td>
-                    <td>${contacto.fecha}</td>
+                    <td>${soporte.id}</td>
+                    <td>${soporte.nombre_completo}</td>
+                    <td>${soporte.telefono ?? ''}</td>
+                    <td>${soporte.correo}</td>
+                    <td>${soporte.mensaje_soporte ?? ''}</td>
 
                     <td class="actions">
 
                         <button
                             class="btn btn-info btn-sm"
-                            onclick="editContacto(${contacto.id})"
+                            onclick="editSoporte(${soporte.id})"
                         >
                             Editar
                         </button>
 
                         <button
                             class="btn btn-danger btn-sm"
-                            onclick="deleteContacto(${contacto.id})"
+                            onclick="deleteSoporte(${soporte.id})"
                         >
                             Eliminar
                         </button>
@@ -168,7 +170,7 @@ async function loadContactos() {
 
         Swal.fire(
             'Error',
-            'No se lograron cargar los mensajes de contacto',
+            'No se lograron cargar las solicitudes de soporte',
             'error'
         );
 
@@ -181,25 +183,26 @@ async function loadContactos() {
 }
 
 
-async function editContacto(id) {
+async function editSoporte(id) {
 
     try {
 
-        const response = await fetch(`${BASE_URL}contacto/apiShow/${id}`);
+        const response = await fetch(`${BASE_URL}soporte/apiShow/${id}`);
         const result = await response.json();
 
         if(result.success){
 
-            const contacto = result.data;
+            const soporte = result.data;
 
-            document.getElementById('contactoId').value = contacto.id;
-            document.getElementById('contactoNombre').value = contacto.nombre;
-            document.getElementById('contactoEmail').value = contacto.email;
-            document.getElementById('contactoMensaje').value = contacto.mensaje;
+            document.getElementById('soporteId').value = soporte.id;
+            document.getElementById('soporteNombre').value = soporte.nombre_completo;
+            document.getElementById('soporteTelefono').value = soporte.telefono ?? '';
+            document.getElementById('soporteCorreo').value = soporte.correo;
+            document.getElementById('soporteMensaje').value = soporte.mensaje_soporte ?? '';
 
-            document.getElementById('modalTitle').textContent = 'Editar Mensaje';
+            document.getElementById('modalTitle').textContent = 'Editar Solicitud';
 
-            document.getElementById('contactoModal').classList.add('active');
+            document.getElementById('soporteModal').classList.add('active');
 
         }else{
 
@@ -215,7 +218,7 @@ async function editContacto(id) {
 
         Swal.fire(
             'Error',
-            'No se pudo cargar el mensaje de contacto',
+            'No se pudo cargar la solicitud de soporte',
             'error'
         );
 
@@ -223,7 +226,7 @@ async function editContacto(id) {
 }
 
 
-function deleteContacto(id) {
+function deleteSoporte(id) {
 
     Swal.fire({
         title: '¿Estás seguro?',
@@ -241,7 +244,7 @@ function deleteContacto(id) {
 
             try {
 
-                const response = await fetch(`${BASE_URL}contacto/apiDelete/${id}`, {
+                const response = await fetch(`${BASE_URL}soporte/apiDelete/${id}`, {
                     method: 'POST'
                 });
 
@@ -255,7 +258,7 @@ function deleteContacto(id) {
                         'success'
                     );
 
-                    loadContactos();
+                    loadSoporte();
 
                 }else{
 

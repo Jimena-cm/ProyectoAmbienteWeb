@@ -1,164 +1,98 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('resenas.js loaded');
 
-    const listaResenas =
-        document.querySelector("#listaResenas");
+    loadResenas();
 
-    const formResena =
-        document.querySelector("#frmResena");
+    const frmResena = document.getElementById('frmResena');
 
-    const msgResena =
-        document.querySelector("#msgResena");
+    frmResena.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-    function cargarResenas() {
+        const nombre = document.getElementById('nombre').value;
+        const calificacion = document.getElementById('calificacion').value;
+        const comentario = document.getElementById('comentario').value;
 
-        fetch("./backend/resenas.php")
-            .then(response => response.json())
-            .then(resultado => {
+        const data = {
+            nombre,
+            calificacion,
+            comentario
+        };
 
-                if (!resultado.success) {
-                    listaResenas.innerHTML = `
-                        <div class="alert alert-danger">
-                            ${resultado.message}
-                        </div>
-                    `;
-                    return;
-                }
-
-                const resenas = resultado.resenas;
-
-                if (resenas.length === 0) {
-
-                    listaResenas.innerHTML = `
-                        <div class="reviews-empty">
-                            <h3>Aún no hay reseñas</h3>
-                            <p>
-                                Sé la primera persona en compartir
-                                tu experiencia.
-                            </p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                let html = "";
-
-                resenas.forEach(resena => {
-                    const estrellas =
-                        "★".repeat(resena.calificacion)
-                        +
-                        "☆".repeat(5 - resena.calificacion);
-
-                    html += `
-
-                        <article class="review-card">
-
-                            <div class="review-card-top">
-
-                                <div class="review-avatar">
-
-                                    ${resena.nombre.charAt(0).toUpperCase()}
-
-                                </div>
-                                <div>
-                                    <h3>
-                                        ${resena.nombre}
-                                    </h3>
-
-                                    <div class="review-stars">
-                                        ${estrellas}
-                                    </div>
-                                
-                                </div>
-                            </div>
-
-                            <p class="review-comment">
-                                ${resena.comentario}
-                            </p>
-                        </article>`;
-                });
-
-
-                listaResenas.innerHTML = html;
-
-            })
-
-            .catch(error => {
-
-                console.log("Error:", error);
-
-                listaResenas.innerHTML = `
-                    <div class="alert alert-danger">
-                        Error al cargar las reseñas.
-                    </div>
-                `;
-
+        try {
+            const response = await fetch(`${BASE_URL}resena/apiStore`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
             });
 
-    }
+            const result = await response.json();
 
+            if(result.success){
+                Swal.fire('Éxito', result.message, 'success');
 
-    formResena.addEventListener(
-        "submit",
-        function (event) {
+                frmResena.reset();
 
-            event.preventDefault();
+                loadResenas();
+            }else{
+                Swal.fire('Error', result.message, 'error');
+            }
 
-
-            const datos =
-                new FormData(formResena);
-
-
-            fetch("./backend/agregar_resena.php", {
-
-                method: "POST",
-
-                body: datos
-
-            })
-
-                .then(response => response.json())
-
-                .then(resultado => {
-
-                    msgResena.textContent =
-                        resultado.message;
-
-
-                    if (resultado.success) {
-
-                        msgResena.className =
-                            "alert alert-success";
-
-                        formResena.reset();
-
-                        cargarResenas();
-
-                    } else {
-
-                        msgResena.className =
-                            "alert alert-danger";
-                    }
-
-                })
-
-                .catch(error => {
-
-                    console.log("Error:", error);
-
-
-                    msgResena.textContent =
-                        "Error al publicar la reseña.";
-
-
-                    msgResena.className =
-                        "alert alert-danger";
-
-                });
-
+        }catch(error){
+            Swal.fire(
+                'Error',
+                'Ocurrió un error al publicar la reseña',
+                'error'
+            );
         }
-    );
-
-
-    cargarResenas();
-
+    });
 });
+
+
+async function loadResenas() {
+    const lista = document.getElementById('listaResenas');
+
+    lista.innerHTML = '';
+
+    try {
+        const response = await fetch(`${BASE_URL}resena/apiList`);
+        const resenas = await response.json();
+
+        if(resenas.length === 0){
+            lista.innerHTML = `
+                <p class="text-muted">
+                    No hay reseñas registradas
+                </p>
+            `;
+            return;
+        }
+
+        resenas.forEach(resena => {
+
+            const estrellas = '★'.repeat(resena.calificacion);
+
+            const card = document.createElement('div');
+
+            card.classList.add('review-card');
+
+            card.innerHTML = `
+                <div class="review-card-header">
+                    <strong>${resena.nombre}</strong>
+                    <span>${estrellas}</span>
+                </div>
+
+                <p>${resena.comentario}</p>
+            `;
+
+            lista.appendChild(card);
+        });
+
+    }catch(error){
+        lista.innerHTML = `
+            <p class="text-danger">
+                No se pudieron cargar las reseñas
+            </p>
+        `;
+    }
+}

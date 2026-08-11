@@ -449,3 +449,21 @@ ADD COLUMN destacado TINYINT(1) NOT NULL DEFAULT 0 AFTER disponible;
 
 USE casa_placa;
 UPDATE placa SET destacado = 1 WHERE id IN (1, 2, 3);
+
+
+
+SELECT r1.id, r1.nombre, r1.comentario, r1.calificacion
+FROM resenas r1
+JOIN resenas r2
+ON r1.nombre = r2.nombre
+AND r1.comentario = r2.comentario
+AND r1.calificacion = r2.calificacion
+AND r1.id > r2.id;
+
+
+DELETE FROM resenas
+WHERE id IN (4, 5, 6, 7, 8);
+
+SELECT *
+FROM resenas
+ORDER BY id;

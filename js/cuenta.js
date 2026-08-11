@@ -1,20 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('contacto.js loaded');
+    console.log('cuenta.js loaded');
 
-    loadContactos();
+    loadCuentas();
 
-    const btnNuevoContacto = document.getElementById('btnNuevoContacto');
-    const modal = document.getElementById('contactoModal');
+    const btnNuevaCuenta = document.getElementById('btnNuevaCuenta');
+    const modal = document.getElementById('cuentaModal');
     const closeModal = document.getElementById('closeModal');
-    const contactoForm = document.getElementById('contactoForm');
+    const cuentaForm = document.getElementById('cuentaForm');
     const modalTitle = document.getElementById('modalTitle');
 
-    btnNuevoContacto.addEventListener('click', () => {
-        modalTitle.textContent = 'Nuevo Mensaje';
+    btnNuevaCuenta.addEventListener('click', () => {
+        modalTitle.textContent = 'Nueva Cuenta';
 
-        contactoForm.reset();
+        cuentaForm.reset();
 
-        document.getElementById('contactoId').value = '';
+        document.getElementById('cuentaId').value = '';
 
         modal.classList.add('active');
     });
@@ -24,23 +24,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    contactoForm.addEventListener('submit', async (e) => {
+    cuentaForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const id = document.getElementById('contactoId').value;
-        const nombre = document.getElementById('contactoNombre').value;
-        const email = document.getElementById('contactoEmail').value;
-        const mensaje = document.getElementById('contactoMensaje').value;
+        const id = document.getElementById('cuentaId').value;
+        const user_id = document.getElementById('cuentaUserId').value;
+        const ubicacion = document.getElementById('cuentaUbicacion').value;
+        const genero = document.getElementById('cuentaGenero').value;
 
         const data = {
-            nombre,
-            email,
-            mensaje
+            user_id,
+            ubicacion,
+            genero
         };
 
         const url = id
-            ? `${BASE_URL}contacto/apiUpdate/${id}`
-            : `${BASE_URL}contacto/apiStore`;
+            ? `${BASE_URL}cuenta/apiUpdate/${id}`
+            : `${BASE_URL}cuenta/apiStore`;
 
         const btnSave = document.getElementById('btnSave');
         const originalText = btnSave.textContent;
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     'success'
                 );
 
-                loadContactos();
+                loadCuentas();
 
             }else{
 
@@ -100,57 +100,56 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-async function loadContactos() {
+async function loadCuentas() {
 
     const loader = document.getElementById('tableLoader');
-    const table = document.getElementById('contactoTable');
-    const tbody = document.getElementById('contactoTbody');
+    const table = document.getElementById('cuentaTable');
+    const tbody = document.getElementById('cuentaTbody');
 
     loader.classList.remove('hidden');
     table.classList.add('hidden');
-
     tbody.innerHTML = '';
 
     try {
 
-        const response = await fetch(`${BASE_URL}contacto/apiList`);
-        const contactos = await response.json();
+        const response = await fetch(`${BASE_URL}cuenta/apiList`);
+        const cuentas = await response.json();
 
-        if(contactos.length === 0){
+        if(cuentas.length === 0){
 
             tbody.innerHTML = `
                 <tr>
                     <td colspan="6" class="text-center text-muted">
-                        No hay mensajes de contacto registrados
+                        No hay cuentas registradas
                     </td>
                 </tr>
             `;
 
         }else{
 
-            contactos.forEach(contacto => {
+            cuentas.forEach(cuenta => {
 
                 const tr = document.createElement('tr');
 
                 tr.innerHTML = `
-                    <td>${contacto.id}</td>
-                    <td>${contacto.nombre}</td>
-                    <td>${contacto.email}</td>
-                    <td>${contacto.mensaje}</td>
-                    <td>${contacto.fecha}</td>
+                    <td>${cuenta.id}</td>
+                    <td>${cuenta.usuario}</td>
+                    <td>${cuenta.email}</td>
+                    <td>${cuenta.ubicacion ?? ''}</td>
+                    <td>${cuenta.genero ?? ''}</td>
 
                     <td class="actions">
 
                         <button
                             class="btn btn-info btn-sm"
-                            onclick="editContacto(${contacto.id})"
+                            onclick="editCuenta(${cuenta.id})"
                         >
                             Editar
                         </button>
 
                         <button
                             class="btn btn-danger btn-sm"
-                            onclick="deleteContacto(${contacto.id})"
+                            onclick="deleteCuenta(${cuenta.id})"
                         >
                             Eliminar
                         </button>
@@ -168,7 +167,7 @@ async function loadContactos() {
 
         Swal.fire(
             'Error',
-            'No se lograron cargar los mensajes de contacto',
+            'No se lograron cargar las cuentas',
             'error'
         );
 
@@ -181,25 +180,25 @@ async function loadContactos() {
 }
 
 
-async function editContacto(id) {
+async function editCuenta(id) {
 
     try {
 
-        const response = await fetch(`${BASE_URL}contacto/apiShow/${id}`);
+        const response = await fetch(`${BASE_URL}cuenta/apiShow/${id}`);
         const result = await response.json();
 
         if(result.success){
 
-            const contacto = result.data;
+            const cuenta = result.data;
 
-            document.getElementById('contactoId').value = contacto.id;
-            document.getElementById('contactoNombre').value = contacto.nombre;
-            document.getElementById('contactoEmail').value = contacto.email;
-            document.getElementById('contactoMensaje').value = contacto.mensaje;
+            document.getElementById('cuentaId').value = cuenta.id;
+            document.getElementById('cuentaUserId').value = cuenta.user_id;
+            document.getElementById('cuentaUbicacion').value = cuenta.ubicacion ?? '';
+            document.getElementById('cuentaGenero').value = cuenta.genero ?? '';
 
-            document.getElementById('modalTitle').textContent = 'Editar Mensaje';
+            document.getElementById('modalTitle').textContent = 'Editar Cuenta';
 
-            document.getElementById('contactoModal').classList.add('active');
+            document.getElementById('cuentaModal').classList.add('active');
 
         }else{
 
@@ -215,7 +214,7 @@ async function editContacto(id) {
 
         Swal.fire(
             'Error',
-            'No se pudo cargar el mensaje de contacto',
+            'No se pudo cargar la cuenta',
             'error'
         );
 
@@ -223,7 +222,7 @@ async function editContacto(id) {
 }
 
 
-function deleteContacto(id) {
+function deleteCuenta(id) {
 
     Swal.fire({
         title: '¿Estás seguro?',
@@ -241,7 +240,7 @@ function deleteContacto(id) {
 
             try {
 
-                const response = await fetch(`${BASE_URL}contacto/apiDelete/${id}`, {
+                const response = await fetch(`${BASE_URL}cuenta/apiDelete/${id}`, {
                     method: 'POST'
                 });
 
@@ -255,7 +254,7 @@ function deleteContacto(id) {
                         'success'
                     );
 
-                    loadContactos();
+                    loadCuentas();
 
                 }else{
 
