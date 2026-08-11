@@ -38,25 +38,31 @@ class User {
         return $result->fetch_assoc();
     }
 
-    public function create($data) {
-        $query = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
-        $stmt = $this->db->prepare($query);
-        $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
-        $stmt->bind_param("sss", $data['name'], $data['email'], $hashedPassword);
-        return $stmt->execute();
+public function create($data) {
+    $query = "INSERT INTO users (name, email, password, phone, address) VALUES (?, ?, ?, ?, ?)";
+    $stmt = $this->db->prepare($query);
+    $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
+    $stmt->bind_param("sssss", $data['name'], $data['email'], $hashedPassword, $data['phone'], $data['address']);
+
+    if($stmt->execute()) {
+        return $this->db->insert_id;
     }
+
+    return false;
+}
 
     public function update($id, $data) {
         if (!empty($data['password'])) {
-            $query = "UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?";
+            $query = "UPDATE users SET name = ?, email = ?, password = ?, phone = ?, address = ? WHERE id = ?";
             $stmt = $this->db->prepare($query);
             $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
-            $stmt->bind_param("sssi", $data['name'], $data['email'], $hashedPassword, $id);
+            $stmt->bind_param("sssssi", $data['name'], $data['email'], $hashedPassword, $data['phone'], $data['address'], $id);
         } else {
-            $query = "UPDATE users SET name = ?, email = ? WHERE id = ?";
+            $query = "UPDATE users SET name = ?, email = ?, phone = ?, address = ? WHERE id = ?";
             $stmt = $this->db->prepare($query);
-            $stmt->bind_param("ssi", $data['name'], $data['email'], $id);
+            $stmt->bind_param("ssssi", $data['name'], $data['email'], $data['phone'], $data['address'], $id);
         }
+
         return $stmt->execute();
     }
 
@@ -66,4 +72,13 @@ class User {
         $stmt->bind_param("i", $id);
         return $stmt->execute();
     }
+
+    public function updateProfileImage($id, $profileImage) {
+    $query = "UPDATE users SET profile_image = ? WHERE id = ?";
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param("si", $profileImage, $id);
+
+    return $stmt->execute();
+}
+
 }

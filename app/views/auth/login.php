@@ -123,7 +123,7 @@
             <div class="registro-link text-center">
                 <span>¿No tienes una cuenta?</span>
 
-                <a href="registro.php">
+                <a href="<?= BASE_URL ?>auth/register">
                     Regístrate
                 </a>
             </div>
