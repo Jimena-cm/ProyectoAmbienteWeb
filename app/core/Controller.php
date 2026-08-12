@@ -1,4 +1,7 @@
 <?php
+
+require_once '../app/config/config.php';
+
 class Controller {
     public function model($model) {
         require_once '../app/models/' . $model . '.php';

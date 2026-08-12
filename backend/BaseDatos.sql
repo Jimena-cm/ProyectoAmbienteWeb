@@ -42,11 +42,10 @@ VALUES
 (1,
 'Bryan Cerdas',
 'admin@correo.com',
-'1234',
+'$2y$12$I4Ok4NE0IXN5.Uut6YfKVOBpf0icPlXpBhDZXKUa3d/j1rL0lZyLa',
 '8888-8888',
 'San José, Costa Rica'
 );
-
 
 
 -- ==========================================
@@ -337,9 +336,23 @@ USE casa_placa;
 
 INSERT IGNORE INTO users (id, name, email, password, phone, address)
 VALUES
-(2, 'Jimena Rojas',     'jimena.rojas@example.com',    '1234', '8811-2233', 'Alajuelita, San José'),
-(3, 'Kimberly Vargas',  'kimberly.vargas@example.com', '1234', '8822-3344', 'Desamparados, San José'),
-(4, 'Nicolás Salas',    'nicolas.salas@example.com',   '1234', '8833-4455', 'Curridabat, San José');
+(2, 'Jimena Rojas',     'jimena.rojas@example.com',    '$2y$12$I4Ok4NE0IXN5.Uut6YfKVOBpf0icPlXpBhDZXKUa3d/j1rL0lZyLa', '8811-2233', 'Alajuelita, San José'),
+(3, 'Kimberly Vargas',  'kimberly.vargas@example.com', '$2y$12$I4Ok4NE0IXN5.Uut6YfKVOBpf0icPlXpBhDZXKUa3d/j1rL0lZyLa', '8822-3344', 'Desamparados, San José'),
+(4, 'Nicolás Salas',    'nicolas.salas@example.com',   '$2y$12$I4Ok4NE0IXN5.Uut6YfKVOBpf0icPlXpBhDZXKUa3d/j1rL0lZyLa', '8833-4455', 'Curridabat, San José');
+
+
+/*Hashee las contraseñas*/
+UPDATE users
+SET password = '$2y$12$I4Ok4NE0IXN5.Uut6YfKVOBpf0icPlXpBhDZXKUa3d/j1rL0lZyLa'
+WHERE id IN (1, 2, 3, 4);
+
+
+/*consulta para ver perfiles*/
+SELECT id, name, email, phone, address
+FROM users;
+
+
+
 
 
 INSERT INTO categoria (id, nombre, descripcion)
