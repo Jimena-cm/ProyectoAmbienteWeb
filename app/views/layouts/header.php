@@ -76,9 +76,13 @@ if ($fotoPerfil === '' || $fotoPerfil === 'usuario.jpg') {
                         <a class="nav-link <?= $activePage === 'disenar' ? 'active' : '' ?>" href="<?= BASE_URL ?>diseno">Diseñar</a>
                     </li>
 
+                   
+
                     <li class="nav-item">
-                        <a class="nav-link <?= $activePage === 'pedido' ? 'active' : '' ?>" href="<?= BASE_URL ?>pedido"> Mis pedidos </a>
+                        <a class="nav-link <?= $activePage === 'pedido' ? 'active' : '' ?>" href="<?= BASE_URL ?>pedido"> Pedidos </a>
                     </li>
+
+                    
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

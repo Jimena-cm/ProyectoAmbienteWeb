@@ -36,7 +36,7 @@ require_once '../app/views/layouts/header.php';
 <div class="modal fade" id="modalPagar" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="post">
+            <form id="formPagar">
                 <div class="modal-header">
                     <h5 class="modal-title">Pagar</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
