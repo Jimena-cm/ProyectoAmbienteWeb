@@ -54,6 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
+
     function actualizarResumen() {
         const material = materialesPorId[selectMaterial.value];
         const tamano = tamanosPorId[selectTamano.value];
@@ -112,5 +114,38 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     cargarOpciones().then(actualizarResumen);
+
+
+btnAgregarCarrito.addEventListener('click', () => {
+        const materialDisenar = materialesPorId[selectMaterial.value];
+        const tamanoDisenar = tamanosPorId[selectTamano.value];
+        const mensajeDisenar = inputMensaje.value.trim();
+        const fotoDisenar = imgPreview.src;
+
+        if (!materialDisenar || !tamanoDisenar || !mensajeDisenar || !fotoDisenar) {
+            alert('Debe completar todos los campos');
+            return;
+        }
+
+        const subtotal = Number(materialDisenar.precio) + Number(tamanoDisenar.precio_adicional);
+        const impuestos = subtotal * IVA;
+        const total = subtotal + impuestos;
+
+        const placaDiseñada = {
+            tipo: 'Diseño',
+            material: materialDisenar.nombre,
+            tamano: tamanoDisenar.dimensiones,
+            mensaje: mensajeDisenar,
+            precio: total,
+            cantidad: 1,
+            imagenPreview: fotoDisenar
+        };
+
+        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        carrito.push(placaDiseñada);
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+
+        alert('Placa personalizada añadida al carrito');
+    });
 
 });
