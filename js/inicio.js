@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
     carouselEl.addEventListener('mouseenter', () => carousel.pause());
     carouselEl.addEventListener('mouseleave', () => carousel.cycle());
   }
+
   const gridDestacados = document.getElementById('cdpGridDestacados');
   const destacadosVacio = document.getElementById('cdpDestacadosVacio');
 

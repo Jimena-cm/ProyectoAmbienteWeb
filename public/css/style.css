@@ -3579,9 +3579,6 @@ body {
     font-size: 15px;
 }
  
-.cdp-admin-actions button:hover {
-    background-color: #F0F1F3;
-}
  
 .cdp-admin-actions .cdp-admin-edit {
     color: #1A2B3C;
@@ -3874,4 +3871,22 @@ body {
 .cdp-disenar-resumen .btn-total:disabled {
     background-color: #C9D1DA;
     cursor: not-allowed;
+}
+
+.cdp-admin-thumb {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #E5E8EC;
+}
+ 
+.cdp-admin-preview-imagen {
+    display: block;
+    max-width: 160px;
+    max-height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #E5E8EC;
+    margin-top: 10px;
 }
