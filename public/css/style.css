@@ -3489,3 +3489,389 @@ body {
     border-radius: 10px;
     cursor: pointer;
 }
+
+.cdp-admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+ 
+.cdp-admin-header h1 {
+    font-size: 22px;
+    font-weight: 800;
+    margin: 0;
+    color: #1A2B3C;
+}
+ 
+.cdp-admin-header .btn-primary,
+.cdp-admin-modal .btn-primary {
+    background-color: #1A2B3C;
+    border-color: #1A2B3C;
+    color: #FFFFFF;
+    font-weight: 600;
+}
+ 
+.cdp-admin-header .btn-primary:hover,
+.cdp-admin-modal .btn-primary:hover {
+    background-color: #D4AF37;
+    border-color: #D4AF37;
+    color: #1A2B3C;
+}
+ 
+/* ---------- Tarjeta + tabla ---------- */
+ 
+.cdp-admin-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E5E8EC;
+    border-radius: 12px;
+    overflow: hidden;
+}
+ 
+.cdp-admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+ 
+.cdp-admin-table th {
+    text-align: left;
+    background-color: #F8F9FA;
+    padding: 12px 18px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #5B6672;
+    border-bottom: 1px solid #E5E8EC;
+}
+ 
+.cdp-admin-table td {
+    padding: 12px 18px;
+    font-size: 14px;
+    border-bottom: 1px solid #F0F1F3;
+    vertical-align: middle;
+}
+ 
+.cdp-admin-table tbody tr:hover {
+    background-color: #FAFBFC;
+}
+ 
+.cdp-admin-empty {
+    text-align: center;
+    padding: 40px;
+    color: #8B96A3;
+    margin: 0;
+}
+ 
+/* ---------- Acciones de fila ---------- */
+ 
+.cdp-admin-actions {
+    white-space: nowrap;
+}
+ 
+.cdp-admin-actions button {
+    border: none;
+    background: none;
+    padding: 6px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+}
+ 
+.cdp-admin-actions button:hover {
+    background-color: #F0F1F3;
+}
+ 
+.cdp-admin-actions .cdp-admin-edit {
+    color: #1A2B3C;
+}
+ 
+.cdp-admin-actions .cdp-admin-delete {
+    color: #B3261E;
+}
+ 
+/* ---------- Modal ---------- */
+ 
+.cdp-admin-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(15, 23, 32, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    padding: 20px;
+}
+ 
+.cdp-admin-modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+ 
+.cdp-admin-modal {
+    background-color: #FFFFFF;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 24px;
+}
+ 
+.cdp-admin-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+ 
+.cdp-admin-modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+    color: #1A2B3C;
+}
+ 
+.cdp-admin-modal-close {
+    border: none;
+    background: none;
+    font-size: 22px;
+    line-height: 1;
+    color: #8B96A3;
+    cursor: pointer;
+}
+ 
+.cdp-admin-form-group {
+    margin-bottom: 14px;
+}
+ 
+.cdp-admin-form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #1A2B3C;
+}
+ 
+.cdp-admin-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid #E5E8EC;
+}
+ 
+ 
+/* ---------- Tarjetas del formulario ---------- */
+ 
+.cdp-disenar-card {
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 6px 24px rgba(26, 43, 60, 0.08);
+    margin-bottom: 18px;
+}
+ 
+.cdp-disenar-card .titulo-disenar {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #1A2B3C;
+    padding: 20px 15px 10px;
+    text-align: center;
+    margin: 0;
+}
+ 
+.cdp-disenar-card .form-disenar {
+    padding: 6px 22px 22px;
+}
+ 
+.cdp-disenar-card label {
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #5B6672;
+    margin-bottom: 8px;
+    display: block;
+}
+ 
+.cdp-disenar-card select,
+.cdp-disenar-card textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #D9DDE2;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #1A2B3C;
+    background-color: #FAFBFC;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+ 
+.cdp-disenar-card select:focus,
+.cdp-disenar-card textarea:focus {
+    outline: none;
+    border-color: #D4AF37;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+    background-color: #FFFFFF;
+}
+ 
+.cdp-disenar-card textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+ 
+.file-disenar {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px dashed #C9D1DA;
+    border-radius: 8px;
+    background-color: #FAFBFC;
+    cursor: pointer;
+    font-size: 14px;
+}
+ 
+.file-disenar:hover {
+    border-color: #D4AF37;
+}
+ 
+/* ---------- Vista previa tipo placa grabada ---------- */
+ 
+.cdp-disenar-preview {
+    position: relative;
+    border-radius: 10px;
+    padding: 2rem 1.75rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background:
+        radial-gradient(120% 140% at 50% 0%, rgba(255, 255, 255, 0.05), transparent 55%),
+        linear-gradient(155deg, #2c2c2b 0%, #1a1a19 55%, #0f0f0e 100%);
+    box-shadow:
+        inset 0 0 0 1px rgba(212, 175, 55, 0.35),
+        inset 0 0 40px rgba(0, 0, 0, 0.5),
+        0 18px 40px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+ 
+.cdp-disenar-preview::before {
+    content: '';
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    border-radius: 6px;
+    pointer-events: none;
+}
+ 
+.cdp-disenar-preview-imagen {
+    width: 100%;
+    max-width: 320px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    margin-bottom: 1.25rem;
+}
+ 
+.cdp-disenar-preview-imagen img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+ 
+.cdp-disenar-preview-mensaje {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: rgba(248, 249, 250, 0.92);
+    max-width: 420px;
+    min-height: 1.6em;
+    margin: 0;
+}
+ 
+.cdp-disenar-preview-mensaje.cdp-disenar-placeholder {
+    color: rgba(212, 175, 55, 0.5);
+}
+ 
+/* ---------- Resumen ---------- */
+ 
+.cdp-disenar-resumen {
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 6px 24px rgba(26, 43, 60, 0.08);
+    padding: 26px 26px 24px;
+}
+ 
+.cdp-disenar-resumen h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.5rem;
+    color: #1A2B3C;
+    text-align: center;
+    margin-bottom: 14px;
+}
+ 
+.cdp-disenar-resumen .precio-pagar {
+    border-bottom: 1px solid #F0F1F3;
+    padding-bottom: 6px !important;
+}
+ 
+.cdp-disenar-resumen .precio-pagar span {
+    font-size: 15px !important;
+    padding: 6px 0 !important;
+}
+ 
+.cdp-disenar-resumen .precio-pagar span:first-child {
+    color: #5B6672;
+}
+ 
+.cdp-disenar-resumen .precio-pagar span:last-child {
+    font-weight: 600;
+    color: #1A2B3C;
+}
+ 
+.cdp-disenar-resumen .total-precio {
+    background-color: #FBF6E7;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-top: 8px;
+}
+ 
+.cdp-disenar-resumen .total-precio .total:first-child {
+    color: #1A2B3C;
+}
+ 
+.cdp-disenar-resumen .total-precio .total:last-child {
+    color: #9E7E1F;
+}
+ 
+.cdp-disenar-resumen .btn-total {
+    background-color: #1A2B3C;
+    border: none;
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-size: 17px;
+    font-weight: 600;
+    padding: 12px 0;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 8px;
+    transition: background-color .2s ease, color .2s ease;
+}
+ 
+.cdp-disenar-resumen .btn-total:hover:not(:disabled) {
+    background-color: #D4AF37;
+    color: #1A2B3C;
+}
+ 
+.cdp-disenar-resumen .btn-total:disabled {
+    background-color: #C9D1DA;
+    cursor: not-allowed;
+}
