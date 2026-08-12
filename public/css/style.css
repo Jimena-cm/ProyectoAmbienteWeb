@@ -3411,6 +3411,7 @@ body {
 
 .btn-total {
     background-color: #10253f;
+    flex:auto;
     border-radius: 10px;
     color: #fff;
     font-size: 20px;
@@ -3889,4 +3890,10 @@ body {
     border-radius: 8px;
     border: 1px solid #E5E8EC;
     margin-top: 10px;
+}
+
+#fechaVencimiento{
+    display: flex;
+    align-items: center;
+    max-width: 110px;
 }

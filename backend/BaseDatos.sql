@@ -42,11 +42,10 @@ VALUES
 (1,
 'Bryan Cerdas',
 'admin@correo.com',
-'$2y$12$I4Ok4NE0IXN5.Uut6YfKVOBpf0icPlXpBhDZXKUa3d/j1rL0lZyLa',
+'1234',
 '8888-8888',
 'San José, Costa Rica'
 );
-
 
 -- ==========================================
 -- TABLA ESTADÍSTICAS DASHBOARD
@@ -217,13 +216,11 @@ ADD profile_image VARCHAR(255) DEFAULT 'usuario.jpg';
 
 USE casa_placa;
 
-
 ALTER TABLE resenas
 ADD COLUMN user_id INT NULL AFTER id;
 
 
 UPDATE resenas SET user_id = 1 WHERE user_id IS NULL;
-
 
 ALTER TABLE resenas
 MODIFY COLUMN user_id INT NOT NULL;
@@ -310,20 +307,16 @@ CREATE TABLE IF NOT EXISTS venta (
     precio              DECIMAL(10,2) NOT NULL DEFAULT 0,
     fecha_creacion      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_modificacion  TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    factura_id          INT NOT NULL,
-    placa_id            INT NOT NULL,
+    factura_id          INT NULL,
     material_id         INT NOT NULL,
     tamano_id           INT NOT NULL,
     FOREIGN KEY (factura_id) REFERENCES factura(id)
         ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (placa_id) REFERENCES placa(id)
-        ON DELETE RESTRICT ON UPDATE CASCADE,
     FOREIGN KEY (material_id) REFERENCES material(id)
         ON DELETE RESTRICT ON UPDATE CASCADE,
     FOREIGN KEY (tamano_id) REFERENCES tamano(id)
         ON DELETE RESTRICT ON UPDATE CASCADE
 );
-
 
 
 SHOW TABLES;
@@ -336,23 +329,9 @@ USE casa_placa;
 
 INSERT IGNORE INTO users (id, name, email, password, phone, address)
 VALUES
-(2, 'Jimena Rojas',     'jimena.rojas@example.com',    '$2y$12$I4Ok4NE0IXN5.Uut6YfKVOBpf0icPlXpBhDZXKUa3d/j1rL0lZyLa', '8811-2233', 'Alajuelita, San José'),
-(3, 'Kimberly Vargas',  'kimberly.vargas@example.com', '$2y$12$I4Ok4NE0IXN5.Uut6YfKVOBpf0icPlXpBhDZXKUa3d/j1rL0lZyLa', '8822-3344', 'Desamparados, San José'),
-(4, 'Nicolás Salas',    'nicolas.salas@example.com',   '$2y$12$I4Ok4NE0IXN5.Uut6YfKVOBpf0icPlXpBhDZXKUa3d/j1rL0lZyLa', '8833-4455', 'Curridabat, San José');
-
-
-/*Hashee las contraseñas*/
-UPDATE users
-SET password = '$2y$12$I4Ok4NE0IXN5.Uut6YfKVOBpf0icPlXpBhDZXKUa3d/j1rL0lZyLa'
-WHERE id IN (1, 2, 3, 4);
-
-
-/*consulta para ver perfiles*/
-SELECT id, name, email, phone, address
-FROM users;
-
-
-
+(2, 'Jimena Rojas',     'jimena.rojas@example.com',    '1234', '8811-2233', 'Alajuelita, San José'),
+(3, 'Kimberly Vargas',  'kimberly.vargas@example.com', '1234', '8822-3344', 'Desamparados, San José'),
+(4, 'Nicolás Salas',    'nicolas.salas@example.com',   '1234', '8833-4455', 'Curridabat, San José');
 
 
 INSERT INTO categoria (id, nombre, descripcion)
@@ -428,6 +407,7 @@ VALUES
 (2, 1, 50000.00, 2, 2, 3, 3),
 (3, 1, 37000.00, 3, 3, 2, 2);
 
+select * from venta;
 
 SELECT COUNT(*) AS total_users     FROM users;
 SELECT COUNT(*) AS total_categoria FROM categoria;
@@ -441,11 +421,3 @@ SELECT COUNT(*) AS total_cuenta    FROM cuenta;
 SELECT COUNT(*) AS total_factura   FROM factura;
 SELECT COUNT(*) AS total_placa     FROM placa;
 SELECT COUNT(*) AS total_venta     FROM venta;
-
-USE casa_placa;
- 
-ALTER TABLE placa
-ADD COLUMN destacado TINYINT(1) NOT NULL DEFAULT 0 AFTER disponible;
-
-USE casa_placa;
-UPDATE placa SET destacado = 1 WHERE id IN (1, 2, 3);

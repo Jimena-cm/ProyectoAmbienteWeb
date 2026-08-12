@@ -1,67 +1,34 @@
-document.addEventListener('DOMContentLoaded', () => {
-    loadFacturas();
-});
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("FACTURA");
 
-async function loadFacturas() {
+    fetch(`factura/apiList`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ carrito: JSON.parse(localStorage.getItem('carrito')) || [] })
+    })
+    then(res => res.json())
+        .then(resp => {
+            if (resp.success) {
+                const detalleDiv = document.getElementById('facturaDetalle');
+                detalleDiv.innerHTML = "";
 
-    const loader = document.getElementById('tableLoader');
-    const table = document.getElementById('facturasTable');
-    const tbody = document.getElementById('facturasTBody');
-
-    try {
-
-        const response = await fetch(
-            `${BASE_URL}factura/apiList`
-        );
-
-        const facturas = await response.json();
-
-        tbody.innerHTML = '';
-
-        if (facturas.length === 0) {
-
-            tbody.innerHTML = `
-                <tr>
-                    <td colspan="6" class="text-center">
-                        No hay facturas registradas
-                    </td>
-                </tr>
-            `;
-
-        } else {
-
-            facturas.forEach(factura => {
-
-                const fila = document.createElement('tr');
-
-                fila.innerHTML = `
-                    <td>${factura.id}</td>
-                    <td>${factura.fecha}</td>
-                    <td>${factura.total}</td>
-                    <td>${factura.estado}</td>
-                    <td>${factura.user_id}</td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-secondary">
-                            Editar
-                        </button>
-
-                        <button class="btn btn-sm btn-outline-danger">
-                            Eliminar
-                        </button>
-                    </td>
+                resp.detalle.forEach(item => {
+                    detalleDiv.innerHTML += `
+                    <div class="col-12 mb-3">
+                        <div class="card-body">
+                            <p>Tamaño: ${item.tamano}</p>
+                            <p>Material: ${item.material}</p>
+                            <p>Cantidad: ${item.cantidad}</p>
+                        </div>
+                    </div>
                 `;
+                });
 
-                tbody.appendChild(fila);
-            });
-        }
-
-    } catch (error) {
-
-        console.log(error);
-
-    } finally {
-
-        loader.classList.add('d-none');
-        table.classList.remove('d-none');
-    }
-}
+                document.getElementById('subtotal').textContent = '₡' + resp.subtotal;
+                document.getElementById('impuestos').textContent = '₡' + resp.impuestos;
+                document.getElementById('total').textContent = '₡' + resp.total;
+            } else {
+                alert("Error al generar factura");
+            }
+        })
+});
