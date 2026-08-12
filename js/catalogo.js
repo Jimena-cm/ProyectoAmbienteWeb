@@ -33,10 +33,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 <p class="cdp-producto-nombre">${producto.nombre}</p>
                 <div class="d-flex justify-content-between align-items-center mt-auto">
                     <span class="cdp-producto-precio">${precio}</span>
-                    <button class="btn btn-sm rounded-circle cdp-btn-agregar" title="Ver detalle"
-                        data-bs-toggle="modal" data-bs-target="#cdpModalDetalle">
-                        <i class="bi bi-eye"></i>
-                    </button>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm rounded-circle cdp-btn-agregar"
+                            title="Ver detalle"
+                            data-bs-toggle="modal"
+                            data-bs-target="#cdpModalDetalle">
+                            <i class="bi bi-eye"></i>     
+                  </button>
+                  <form action="${BASE_URL}carrito/agregar/${producto.id}"
+                      method="POST">
+                      <button type="submit"
+                          class="btn btn-sm rounded-circle cdp-btn-agregar"
+                          title="Agregar al carrito">
+                          <i class="bi bi-cart-plus"></i>
+                      </button>
+                  </form>
+                    </div>
                 </div>
             </div>
         </div>

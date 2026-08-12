@@ -182,41 +182,19 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIHWwyVSogX0PYkNxSFNOWEWXY5E4GiVmwXQySHbq_ciJbt6FrTJaAwrqK&s=10" class="img-fluid rounded-start" alt="...">
+                        <img src="" class="img-fluid rounded-start" alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">Acero Cepillado Moderno</h5>
-                            <p class="card-text">Placa en acero inoxidable cepillado, resistente a la intemperie. Acabado industrial elegante, recomendado para exteriores y placas identificativas duraderas.</p>
+                            <h5 class="card-title"></h5>
+                            <p class="card-text"></p>
                             <div class="cantidad-precio">
                                 <div class="cantidad-carrito">
                                     <button class="btn-restar">-</button>
-                                    <span id="cantidad">1</span>
+                                    <span id="cantidad"></span>
                                     <button class="btn-aumentar">+</button>
                                 </div>
-                                <p class="precio">₡82 500</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIHWwyVSogX0PYkNxSFNOWEWXY5E4GiVmwXQySHbq_ciJbt6FrTJaAwrqK&s=10" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Cristal Esmerilado Pro</h5>
-                            <p class="card-text">Placa en vidrio esmerilado con grabado interno de alta definición. Un estilo moderno y minimalista, ideal para espacios corporativos contemporáneos.</p>
-                            <div class="cantidad-precio">
-                                <div class="cantidad-carrito">
-                                    <button class="btn-restar">-</button>
-                                    <span id="cantidad">1</span>
-                                    <button class="btn-aumentar">+</button>
-                                </div>
-                                <p class="precio">₡105 000</p>
+                                <p class="precio"></p>
                             </div>
                         </div>
                     </div>
@@ -261,7 +239,6 @@ if ($fotoPerfil === "" || $fotoPerfil === "usuario.jpg") {
                 <p class="cdp-footer-tagline">Placas que conservan la memoria.</p>
             </div>
 
-            <!-- NOTA: reemplaza estos enlaces por las redes reales del negocio -->
             <div class="cdp-footer-social mb-2 text-center">
                 <a href="https://www.facebook.com/share/1L1eFBMFed/" class="cdp-social-btn text-decoration-none" aria-label="Facebook">
                     <i class="bi bi-facebook"></i>
