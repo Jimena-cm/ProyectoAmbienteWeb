@@ -1,6 +1,6 @@
 <?php
 class DashboardController extends Controller {
-    private $productoModel;
+    private $placaModel;
 
     public function __construct() {
         if (session_status() === PHP_SESSION_NONE) {
@@ -11,8 +11,9 @@ class DashboardController extends Controller {
             $this->redirect('');
         }
 
-        $this->productoModel = $this->model('Producto');
+        $this->placaModel = $this->model('Placa');
     }
+
 
     public function index() {
         $this->view('dashboard/index');
@@ -20,7 +21,7 @@ class DashboardController extends Controller {
 
     public function apiDestacados() {
         header('Content-Type: application/json');
-        $destacados = $this->productoModel->obtenerDestacados(4);
+        $destacados = $this->placaModel->getDestacadas(4);
         echo json_encode($destacados);
     }
 }

@@ -1,0 +1,175 @@
+
+
+.cdp-admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.cdp-admin-header h1 {
+    font-size: 22px;
+    font-weight: 800;
+    margin: 0;
+    color: #1A2B3C;
+}
+
+.cdp-admin-header .btn-primary {
+    background-color: #1A2B3C;
+    border-color: #1A2B3C;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.cdp-admin-header .btn-primary:hover {
+    background-color: #D4AF37;
+    border-color: #D4AF37;
+    color: #1A2B3C;
+}
+
+/* ---------- Tarjeta + tabla ---------- */
+
+.cdp-admin-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E5E8EC;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.cdp-admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cdp-admin-table th {
+    text-align: left;
+    background-color: #F8F9FA;
+    padding: 12px 18px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #5B6672;
+    border-bottom: 1px solid #E5E8EC;
+}
+
+.cdp-admin-table td {
+    padding: 12px 18px;
+    font-size: 14px;
+    border-bottom: 1px solid #F0F1F3;
+    vertical-align: middle;
+}
+
+.cdp-admin-table tbody tr:hover {
+    background-color: #FAFBFC;
+}
+
+.cdp-admin-empty {
+    text-align: center;
+    padding: 40px;
+    color: #8B96A3;
+    margin: 0;
+}
+
+/* ---------- Acciones de fila ---------- */
+
+.cdp-admin-actions {
+    white-space: nowrap;
+}
+
+.cdp-admin-actions button {
+    border: none;
+    background: none;
+    padding: 6px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.cdp-admin-actions button:hover {
+    background-color: #F0F1F3;
+}
+
+.cdp-admin-actions .cdp-admin-edit {
+    color: #1A2B3C;
+}
+
+.cdp-admin-actions .cdp-admin-delete {
+    color: #B3261E;
+}
+
+/* ---------- Modal ---------- */
+
+.cdp-admin-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(15, 23, 32, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    padding: 20px;
+}
+
+.cdp-admin-modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.cdp-admin-modal {
+    background-color: #FFFFFF;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 24px;
+}
+
+.cdp-admin-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.cdp-admin-modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+    color: #1A2B3C;
+}
+
+.cdp-admin-modal-close {
+    border: none;
+    background: none;
+    font-size: 22px;
+    line-height: 1;
+    color: #8B96A3;
+    cursor: pointer;
+}
+
+.cdp-admin-form-group {
+    margin-bottom: 14px;
+}
+
+.cdp-admin-form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #1A2B3C;
+}
+
+.cdp-admin-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid #E5E8EC;
+}

@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../../config/Database.php';
+
 if (!isset($activePage)) {
     $activePage = '';
 }
@@ -37,6 +39,7 @@ if ($fotoPerfil === '' || $fotoPerfil === 'usuario.jpg') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= BASE_URL ?>css/style.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>css/admin.css">
 </head>
 
 <body class="home-body">
@@ -88,6 +91,12 @@ if ($fotoPerfil === '' || $fotoPerfil === 'usuario.jpg') {
                         <a class="nav-link <?= $activePage === 'carrito' ? 'active' : '' ?>" href="<?= BASE_URL ?>carrito">Carrito</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link <?= $activePage === 'admin' ? 'active' : '' ?>" href="<?= BASE_URL ?>admin">
+                            <i class="bi bi-gear-fill"></i> Admin
+                        </a>
+                    </li>
+
                     <li class="nav-item dropdown ms-lg-3">
                         <a class="nav-link dropdown-toggle cuenta-menu" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="<?= htmlspecialchars($rutaFoto) ?>" alt="Foto del usuario" class="cuenta-imagen">
@@ -109,4 +118,4 @@ if ($fotoPerfil === '' || $fotoPerfil === 'usuario.jpg') {
         </div>
     </nav>
 
-    <main class="cdp-page">
+    <main class="cdp-page"></main>

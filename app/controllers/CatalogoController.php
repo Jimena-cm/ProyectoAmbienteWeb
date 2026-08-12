@@ -1,6 +1,6 @@
 <?php
 class CatalogoController extends Controller {
-    private $productoModel;
+    private $placaModel;
 
     public function __construct() {
         if (session_status() === PHP_SESSION_NONE) {
@@ -11,25 +11,24 @@ class CatalogoController extends Controller {
             $this->redirect('');
         }
 
-        $this->productoModel = $this->model('Producto');
+        $this->placaModel = $this->model('Placa');
     }
 
     public function index() {
         $this->view('catalogo/index');
     }
 
-
     public function apiList() {
         header('Content-Type: application/json');
-        $productos = $this->productoModel->obtenerDisponibles();
+        $productos = $this->placaModel->getDisponibles();
         echo json_encode($productos);
     }
 
     public function apiDetalle($id) {
         header('Content-Type: application/json');
-        $producto = $this->productoModel->obtenerPorId($id);
+        $producto = $this->placaModel->getById($id);
 
-        if ($producto) {
+        if ($producto && $producto['disponible']) {
             echo json_encode(['success' => true, 'data' => $producto]);
         } else {
             echo json_encode(['success' => false, 'message' => 'Producto no encontrado']);
