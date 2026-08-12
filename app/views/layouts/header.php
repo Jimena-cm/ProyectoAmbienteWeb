@@ -22,9 +22,9 @@ if (isset($_SESSION['user_id'])) {
 }
 
 if ($fotoPerfil === '' || $fotoPerfil === 'usuario.jpg') {
-    $rutaFoto = BASE_URL . 'public/img/usuario.jpg';
+    $rutaFoto = BASE_URL . 'img/usuario.jpg';
 } else {
-    $rutaFoto = BASE_URL . 'uploads/' . $fotoPerfil;
+    $rutaFoto = ROOT_URL . 'uploads/' . $fotoPerfil;
 }
 ?>
 <!DOCTYPE html>
@@ -36,7 +36,7 @@ if ($fotoPerfil === '' || $fotoPerfil === 'usuario.jpg') {
     <title><?= htmlspecialchars($pageTitle) ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?= BASE_URL ?>public/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>css/style.css">
 </head>
 
 <body class="home-body">
@@ -44,7 +44,7 @@ if ($fotoPerfil === '' || $fotoPerfil === 'usuario.jpg') {
         <div class="container-fluid">
 
             <a class="navbar-brand d-flex align-items-center gap-2" href="<?= BASE_URL ?>dashboard">
-                <img src="<?= BASE_URL ?>public/img/logo.jpg" alt="Logo de La Casa de la Placa" class="navbar-logo">
+                <img src="<?= BASE_URL ?>img/logo.jpg" alt="Logo de La Casa de la Placa" class="navbar-logo">
                 <span>LA CASA DE LA PLACA</span>
             </a>
 

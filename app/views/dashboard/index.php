@@ -105,7 +105,6 @@ require_once '../app/views/layouts/header.php';
     </div>
 </section>
 
-
 <section class="cdp-destacados">
     <div class="container">
         <p class="cdp-section-eyebrow">Catálogo</p>
@@ -149,7 +148,8 @@ require_once '../app/views/layouts/header.php';
 
 <script>
     const BASE_URL = "<?= BASE_URL ?>";
+    const ROOT_URL = "<?= ROOT_URL ?>";
 </script>
-<script src="<?= BASE_URL ?>js/inicio.js"></script>
+<script src="<?= ROOT_URL ?>js/inicio.js"></script>
 
 <?php require_once '../app/views/layouts/footer.php'; ?>

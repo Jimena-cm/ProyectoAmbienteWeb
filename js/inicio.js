@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
     carouselEl.addEventListener('mouseenter', () => carousel.pause());
     carouselEl.addEventListener('mouseleave', () => carousel.cycle());
   }
-
   const gridDestacados = document.getElementById('cdpGridDestacados');
   const destacadosVacio = document.getElementById('cdpDestacadosVacio');
 
@@ -48,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function rutaImagen(nombreImagen) {
-    return nombreImagen ? BASE_URL + 'uploads/' + nombreImagen : '';
+    return nombreImagen ? ROOT_URL + 'uploads/' + nombreImagen : '';
   }
 
   function cargarDestacados() {

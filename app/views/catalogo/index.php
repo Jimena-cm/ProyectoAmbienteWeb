@@ -19,9 +19,11 @@ require_once '../app/views/layouts/header.php';
             <button type="button" class="btn btn-sm rounded-pill cdp-filtro active" data-filtro="todos">
                 <i class="bi bi-sliders me-1"></i> Todas las colecciones
             </button>
+
         </div>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4" id="cdpGridProductos">
+
         </div>
 
         <p id="cdpCargando" class="text-center text-muted mt-5">
@@ -59,7 +61,8 @@ require_once '../app/views/layouts/header.php';
 
 <script>
     const BASE_URL = "<?= BASE_URL ?>";
+    const ROOT_URL = "<?= ROOT_URL ?>";
 </script>
-<script src="<?= BASE_URL ?>js/catalogo.js"></script>
+<script src="<?= ROOT_URL ?>js/catalogo.js"></script>
 
 <?php require_once '../app/views/layouts/footer.php'; ?>
