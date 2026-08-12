@@ -98,6 +98,7 @@ require_once '../app/views/layouts/header.php';
     const BASE_URL = "<?= BASE_URL ?>";
     const ROOT_URL = "<?= ROOT_URL ?>";
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="<?= ROOT_URL ?>js/diseno.js"></script>
 
 <?php require_once '../app/views/layouts/footer.php'; ?>

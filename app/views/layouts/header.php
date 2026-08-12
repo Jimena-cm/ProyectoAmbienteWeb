@@ -89,9 +89,6 @@ if ($fotoPerfil === '' || $fotoPerfil === 'usuario.jpg') {
                             Atención al cliente
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="<?= BASE_URL ?>pagina/faq">Preguntas frecuentes</a></li>
-                            <li><a class="dropdown-item" href="<?= BASE_URL ?>contacto">Contacto</a></li>
-                            <li><a class="dropdown-item" href="<?= BASE_URL ?>pagina/ubicacion">Ubicación</a></li>
                             <li><a class="dropdown-item" href="<?= BASE_URL ?>resena">Reseñas</a></li>
                         </ul>
                     </li>

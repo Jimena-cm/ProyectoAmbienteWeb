@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!archivo) return;
 
         if (!archivo.type.startsWith('image/')) {
-            alert('El archivo seleccionado no es una imagen.');
+            Swal.fire('Archivo inválido', 'El archivo seleccionado no es una imagen.', 'error');
             inputImagen.value = '';
             return;
         }
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const fotoDisenar = imgPreview.src;
 
         if (!materialDisenar || !tamanoDisenar || !mensajeDisenar || !fotoDisenar) {
-            alert('Debe completar todos los campos');
+            Swal.fire('Campos incompletos', 'Debe completar todos los campos antes de continuar.', 'warning');
             return;
         }
 
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         carrito.push(placaPersonalizada);
         localStorage.setItem('carrito', JSON.stringify(carrito));
 
-        alert('Placa personalizada añadida al carrito');
+        Swal.fire('¡Listo!', 'Tu placa personalizada fue añadida al carrito.', 'success');
     });
 
 
