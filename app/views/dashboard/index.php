@@ -110,7 +110,7 @@ require_once '../app/views/layouts/header.php';
         <p class="cdp-section-eyebrow">Catálogo</p>
         <h2 class="cdp-section-title">Productos destacados</h2>
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4" id="cdpGridDestacados">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4 justify-content-center" id="cdpGridDestacados">
         </div>
 
         <p id="cdpDestacadosVacio" class="text-center text-muted mt-4 d-none">

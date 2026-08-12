@@ -428,3 +428,11 @@ SELECT COUNT(*) AS total_cuenta    FROM cuenta;
 SELECT COUNT(*) AS total_factura   FROM factura;
 SELECT COUNT(*) AS total_placa     FROM placa;
 SELECT COUNT(*) AS total_venta     FROM venta;
+
+USE casa_placa;
+ 
+ALTER TABLE placa
+ADD COLUMN destacado TINYINT(1) NOT NULL DEFAULT 0 AFTER disponible;
+
+USE casa_placa;
+UPDATE placa SET destacado = 1 WHERE id IN (1, 2, 3);

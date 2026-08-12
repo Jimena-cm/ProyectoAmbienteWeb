@@ -1,47 +1,95 @@
-
-
 document.addEventListener('DOMContentLoaded', function () {
 
   const buscador = document.getElementById('cdpBuscarPlaca');
-  const filtros = document.querySelectorAll('.cdp-filtro');
-  const productos = document.querySelectorAll('.cdp-producto');
+  const filtrosContenedor = document.getElementById('cdpFiltros');
+  const grid = document.getElementById('cdpGridProductos');
   const sinResultados = document.getElementById('cdpSinResultados');
+  const cargando = document.getElementById('cdpCargando');
 
+  let productosData = [];
   let filtroActivo = 'todos';
+
+  function renderizarProductos(lista) {
+    grid.innerHTML = '';
+
+    lista.forEach((producto) => {
+      const precio = '₡' + Number(producto.precio).toLocaleString('es-CR');
+      const imagen = producto.imagen_nombre ? ROOT_URL + 'uploads/' + producto.imagen_nombre : '';
+
+      const col = document.createElement('div');
+      col.className = 'col cdp-producto';
+      col.dataset.material = producto.material;
+      col.dataset.nombre = producto.nombre;
+      col.dataset.precio = precio;
+      col.dataset.imagen = imagen;
+      col.dataset.descripcion = producto.descripcion;
+
+      col.innerHTML = `
+        <div class="card cdp-producto-card h-100">
+            <div class="cdp-producto-img-wrap">
+                <img src="${imagen}" class="card-img-top" alt="${producto.nombre}">
+            </div>
+            <div class="card-body d-flex flex-column">
+                <p class="cdp-producto-nombre">${producto.nombre}</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <span class="cdp-producto-precio">${precio}</span>
+                    <button class="btn btn-sm rounded-circle cdp-btn-agregar" title="Ver detalle"
+                        data-bs-toggle="modal" data-bs-target="#cdpModalDetalle">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+      `;
+
+      grid.appendChild(col);
+    });
+  }
+  function renderizarFiltros() {
+    const materiales = [...new Set(productosData.map((p) => p.material))];
+
+    materiales.forEach((material) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'btn btn-sm rounded-pill cdp-filtro';
+      btn.dataset.filtro = material;
+      btn.textContent = material.charAt(0).toUpperCase() + material.slice(1);
+      filtrosContenedor.appendChild(btn);
+    });
+
+    inicializarFiltros();
+  }
 
   function aplicarFiltro() {
     const texto = buscador.value.trim().toLowerCase();
-    let visibles = 0;
 
-    productos.forEach((producto) => {
-      const nombre = producto.querySelector('.cdp-producto-nombre').textContent.toLowerCase();
-      const material = producto.dataset.material;
-
-      const coincideMaterial = (filtroActivo === 'todos' || material === filtroActivo);
-      const coincideTexto = nombre.includes(texto);
-
-      const visible = coincideMaterial && coincideTexto;
-      producto.classList.toggle('d-none', !visible);
-      if (visible) visibles++;
+    const filtrados = productosData.filter((producto) => {
+      const coincideMaterial = (filtroActivo === 'todos' || producto.material === filtroActivo);
+      const coincideTexto = producto.nombre.toLowerCase().includes(texto);
+      return coincideMaterial && coincideTexto;
     });
 
-    sinResultados.classList.toggle('d-none', visibles > 0);
+    renderizarProductos(filtrados);
+    sinResultados.classList.toggle('d-none', filtrados.length > 0);
+  }
+
+  function inicializarFiltros() {
+    const filtros = document.querySelectorAll('.cdp-filtro');
+
+    filtros.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filtros.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        filtroActivo = btn.dataset.filtro;
+        aplicarFiltro();
+      });
+    });
   }
 
   if (buscador) {
     buscador.addEventListener('input', aplicarFiltro);
   }
 
-  filtros.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      filtros.forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-      filtroActivo = btn.dataset.filtro;
-      aplicarFiltro();
-    });
-  });
-
-  // ---- Modal de detalle del producto ----
   const modalDetalle = document.getElementById('cdpModalDetalle');
 
   if (modalDetalle) {
@@ -56,5 +104,19 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById('cdpModalDescripcion').textContent = tarjeta.dataset.descripcion;
     });
   }
+
+
+  fetch(`${BASE_URL}catalogo/apiList`)
+    .then((res) => res.json())
+    .then((data) => {
+      productosData = data;
+      if (cargando) cargando.classList.add('d-none');
+      renderizarProductos(productosData);
+      renderizarFiltros();
+    })
+    .catch((error) => {
+      console.error('Error cargando el catálogo:', error);
+      if (cargando) cargando.textContent = 'Ocurrió un error cargando el catálogo.';
+    });
 
 });

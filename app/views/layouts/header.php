@@ -109,4 +109,4 @@ if ($fotoPerfil === '' || $fotoPerfil === 'usuario.jpg') {
         </div>
     </nav>
 
-    <main class="cdp-page"></main>
+    <main class="cdp-page">
