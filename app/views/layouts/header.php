@@ -77,7 +77,7 @@ if ($fotoPerfil === '' || $fotoPerfil === 'usuario.jpg') {
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link <?= $activePage === 'historial' ? 'active' : '' ?>" href="<?= BASE_URL ?>pedido/historial">Mi historial</a>
+                        <a class="nav-link <?= $activePage === 'pedido' ? 'active' : '' ?>" href="<?= BASE_URL ?>pedido"> Mis pedidos </a>
                     </li>
 
                     <li class="nav-item dropdown">

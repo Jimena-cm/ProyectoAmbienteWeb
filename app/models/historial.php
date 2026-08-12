@@ -1,7 +1,7 @@
 <?php
 require_once '../app/config/Database.php';
 
-class Resena {
+class Historial {
     private $db;
 
     public function __construct() {
@@ -9,22 +9,22 @@ class Resena {
     }
 
     public function getAll() {
-        $query = "SELECT * FROM resenas ORDER BY id DESC";
+        $query = "SELECT * FROM historial ORDER BY id DESC";
         $result = $this->db->query($query);
 
-        $resenas = [];
+        $historial = [];
 
         if ($result && $result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $resenas[] = $row;
+                $historial[] = $row;
             }
         }
 
-        return $resenas;
+        return $historial;
     }
 
     public function getById($id) {
-        $query = "SELECT * FROM resenas WHERE id = ?";
+        $query = "SELECT * FROM historial WHERE id = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -35,39 +35,39 @@ class Resena {
     }
 
     public function create($data) {
-        $query = "INSERT INTO resenas
-                  (user_id, nombre, comentario, calificacion)
+        $query = "INSERT INTO historial
+                  (user_id, producto, fecha, estado)
                   VALUES (?, ?, ?, ?)";
 
         $stmt = $this->db->prepare($query);
 
         $stmt->bind_param(
-            "issi",
+            "isss",
             $data['user_id'],
-            $data['nombre'],
-            $data['comentario'],
-            $data['calificacion']
+            $data['producto'],
+            $data['fecha'],
+            $data['estado']
         );
 
         return $stmt->execute();
     }
 
     public function update($id, $data) {
-        $query = "UPDATE resenas
+        $query = "UPDATE historial
                   SET user_id = ?,
-                      nombre = ?,
-                      comentario = ?,
-                      calificacion = ?
+                      producto = ?,
+                      fecha = ?,
+                      estado = ?
                   WHERE id = ?";
 
         $stmt = $this->db->prepare($query);
 
         $stmt->bind_param(
-            "issii",
+            "isssi",
             $data['user_id'],
-            $data['nombre'],
-            $data['comentario'],
-            $data['calificacion'],
+            $data['producto'],
+            $data['fecha'],
+            $data['estado'],
             $id
         );
 
@@ -75,7 +75,7 @@ class Resena {
     }
 
     public function delete($id) {
-        $query = "DELETE FROM resenas WHERE id = ?";
+        $query = "DELETE FROM historial WHERE id = ?";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $id);

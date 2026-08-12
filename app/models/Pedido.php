@@ -147,4 +147,69 @@ class Pedido
 
         return array_values($pedidos);
     }
+    public function obtenerTodos()
+{
+    $query = "SELECT
+                f.id AS factura_id,
+                f.fecha,
+                f.total,
+                f.estado,
+                f.user_id,
+                v.cantidad,
+                v.precio,
+                p.id AS placa_id,
+                p.nombre,
+                p.imagen_nombre
+              FROM factura f
+              LEFT JOIN venta v
+                ON f.id = v.factura_id
+              LEFT JOIN placa p
+                ON v.placa_id = p.id
+              ORDER BY f.fecha_creacion DESC, f.id DESC";
+
+    $result = $this->db->query($query);
+
+    $pedidos = [];
+
+    while ($row = $result->fetch_assoc()) {
+
+        $facturaId = $row['factura_id'];
+
+        if (!isset($pedidos[$facturaId])) {
+
+            $pedidos[$facturaId] = [
+                'id' => $facturaId,
+                'fecha' => $row['fecha'],
+                'total' => $row['total'],
+                'estado' => $row['estado'],
+                'user_id' => $row['user_id'],
+                'productos' => []
+            ];
+        }
+
+        if ($row['placa_id']) {
+
+            $pedidos[$facturaId]['productos'][] = [
+                'id' => $row['placa_id'],
+                'nombre' => $row['nombre'],
+                'imagen_nombre' => $row['imagen_nombre'],
+                'cantidad' => $row['cantidad'],
+                'precio' => $row['precio']
+            ];
+        }
+    }
+
+    return array_values($pedidos);
+}
+
+
+public function eliminar($id)
+{
+    $query = "DELETE FROM factura WHERE id = ?";
+
+    $stmt = $this->db->prepare($query);
+    $stmt->bind_param("i", $id);
+
+    return $stmt->execute();
+}
 }

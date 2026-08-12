@@ -1,7 +1,7 @@
 <?php
 require_once '../app/config/Database.php';
 
-class Resena {
+class Venta {
     private $db;
 
     public function __construct() {
@@ -9,22 +9,22 @@ class Resena {
     }
 
     public function getAll() {
-        $query = "SELECT * FROM resenas ORDER BY id DESC";
+        $query = "SELECT * FROM venta ORDER BY id DESC";
         $result = $this->db->query($query);
 
-        $resenas = [];
+        $ventas = [];
 
         if ($result && $result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $resenas[] = $row;
+                $ventas[] = $row;
             }
         }
 
-        return $resenas;
+        return $ventas;
     }
 
     public function getById($id) {
-        $query = "SELECT * FROM resenas WHERE id = ?";
+        $query = "SELECT * FROM venta WHERE id = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -35,39 +35,45 @@ class Resena {
     }
 
     public function create($data) {
-        $query = "INSERT INTO resenas
-                  (user_id, nombre, comentario, calificacion)
-                  VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO venta
+                  (cantidad, precio, factura_id, placa_id, material_id, tamano_id)
+                  VALUES (?, ?, ?, ?, ?, ?)";
 
         $stmt = $this->db->prepare($query);
 
         $stmt->bind_param(
-            "issi",
-            $data['user_id'],
-            $data['nombre'],
-            $data['comentario'],
-            $data['calificacion']
+            "idiiii",
+            $data['cantidad'],
+            $data['precio'],
+            $data['factura_id'],
+            $data['placa_id'],
+            $data['material_id'],
+            $data['tamano_id']
         );
 
         return $stmt->execute();
     }
 
     public function update($id, $data) {
-        $query = "UPDATE resenas
-                  SET user_id = ?,
-                      nombre = ?,
-                      comentario = ?,
-                      calificacion = ?
+        $query = "UPDATE venta
+                  SET cantidad = ?,
+                      precio = ?,
+                      factura_id = ?,
+                      placa_id = ?,
+                      material_id = ?,
+                      tamano_id = ?
                   WHERE id = ?";
 
         $stmt = $this->db->prepare($query);
 
         $stmt->bind_param(
-            "issii",
-            $data['user_id'],
-            $data['nombre'],
-            $data['comentario'],
-            $data['calificacion'],
+            "idiiiii",
+            $data['cantidad'],
+            $data['precio'],
+            $data['factura_id'],
+            $data['placa_id'],
+            $data['material_id'],
+            $data['tamano_id'],
             $id
         );
 
@@ -75,7 +81,7 @@ class Resena {
     }
 
     public function delete($id) {
-        $query = "DELETE FROM resenas WHERE id = ?";
+        $query = "DELETE FROM venta WHERE id = ?";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $id);

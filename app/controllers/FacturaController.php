@@ -1,7 +1,7 @@
 <?php
 
-class ResenaController extends Controller {
-    private $resenaModel;
+class FacturaController extends Controller {
+    private $facturaModel;
 
     public function __construct() {
         if (session_status() === PHP_SESSION_NONE) {
@@ -12,35 +12,35 @@ class ResenaController extends Controller {
             $this->redirect('');
         }
 
-        $this->resenaModel = $this->model('Resena');
+        $this->facturaModel = $this->model('Factura');
     }
 
     public function index() {
-        $this->view('admin/resena');
+        $this->view('admin/facturas');
     }
 
     public function apiList() {
         header('Content-Type: application/json');
 
         echo json_encode(
-            $this->resenaModel->getAll()
+            $this->facturaModel->getAll()
         );
     }
 
     public function apiShow($id) {
         header('Content-Type: application/json');
 
-        $resena = $this->resenaModel->getById($id);
+        $factura = $this->facturaModel->getById($id);
 
-        if ($resena) {
+        if ($factura) {
             echo json_encode([
                 'success' => true,
-                'data' => $resena
+                'data' => $factura
             ]);
         } else {
             echo json_encode([
                 'success' => false,
-                'message' => 'Reseña no encontrada'
+                'message' => 'Factura no encontrada'
             ]);
         }
     }
@@ -54,26 +54,26 @@ class ResenaController extends Controller {
         );
 
         if (
-            !isset($data['user_id']) ||
-            empty($data['nombre']) ||
-            empty($data['comentario']) ||
-            !isset($data['calificacion'])
+            empty($data['fecha']) ||
+            !isset($data['total']) ||
+            empty($data['estado']) ||
+            !isset($data['user_id'])
         ) {
             echo json_encode([
                 'success' => false,
-                'message' => 'Todos los campos son requeridos'
+                'message' => 'Fecha, total, estado y usuario son requeridos'
             ]);
 
             return;
         }
 
-        $resultado = $this->resenaModel->create($data);
+        $resultado = $this->facturaModel->create($data);
 
         echo json_encode([
             'success' => (bool) $resultado,
             'message' => $resultado
-                ? 'Reseña creada correctamente'
-                : 'Error al crear la reseña',
+                ? 'Factura creada correctamente'
+                : 'Error al crear la factura',
         ]);
     }
 
@@ -86,20 +86,20 @@ class ResenaController extends Controller {
         );
 
         if (
-            !isset($data['user_id']) ||
-            empty($data['nombre']) ||
-            empty($data['comentario']) ||
-            !isset($data['calificacion'])
+            empty($data['fecha']) ||
+            !isset($data['total']) ||
+            empty($data['estado']) ||
+            !isset($data['user_id'])
         ) {
             echo json_encode([
                 'success' => false,
-                'message' => 'Todos los campos son requeridos'
+                'message' => 'Fecha, total, estado y usuario son requeridos'
             ]);
 
             return;
         }
 
-        $resultado = $this->resenaModel->update(
+        $resultado = $this->facturaModel->update(
             $id,
             $data
         );
@@ -107,21 +107,21 @@ class ResenaController extends Controller {
         echo json_encode([
             'success' => (bool) $resultado,
             'message' => $resultado
-                ? 'Reseña actualizada correctamente'
-                : 'Error al actualizar la reseña',
+                ? 'Factura actualizada correctamente'
+                : 'Error al actualizar la factura',
         ]);
     }
 
     public function apiDelete($id) {
         header('Content-Type: application/json');
 
-        $resultado = $this->resenaModel->delete($id);
+        $resultado = $this->facturaModel->delete($id);
 
         echo json_encode([
             'success' => (bool) $resultado,
             'message' => $resultado
-                ? 'Reseña eliminada correctamente'
-                : 'Error al eliminar la reseña',
+                ? 'Factura eliminada correctamente'
+                : 'Error al eliminar la factura',
         ]);
     }
 }

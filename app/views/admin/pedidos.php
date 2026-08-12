@@ -1,21 +1,21 @@
 <?php
 $activePage = 'admin';
-$pageTitle = 'Resumen | Admin';
+$pageTitle = 'Pedidos | Admin';
 require_once '../app/views/layouts/header.php';
 
-$adminSection = 'admin';
+$adminSection = 'pedido';
 ?>
 
 <section class="cdp-catalogo">
     <div class="container py-5">
 
         <div class="cdp-admin-header">
-            <h1>Resumen</h1>
+            <h1>Pedidos</h1>
         </div>
 
         <?php require_once '../app/views/partials/admin_nav.php'; ?>
 
-        <div id="resumenLoader"
+        <div id="pedidosLoader"
              class="text-center py-5">
 
             <div class="spinner-border"
@@ -29,9 +29,7 @@ $adminSection = 'admin';
 
         </div>
 
-
-        <div class="row g-4 d-none"
-             id="resumenCards">
+        <div id="pedidosLista">
         </div>
 
     </div>
@@ -45,6 +43,6 @@ $adminSection = 'admin';
     const ROOT_URL = "<?= ROOT_URL ?>";
 </script>
 
-<script src="<?= ROOT_URL ?>js/resumen.js"></script>
+<script src="<?= ROOT_URL ?>js/pedido.js"></script>
 
 <?php require_once '../app/views/layouts/footer.php'; ?>

@@ -1,7 +1,7 @@
 <?php
 
-class ResenaController extends Controller {
-    private $resenaModel;
+class HistorialController extends Controller {
+    private $historialModel;
 
     public function __construct() {
         if (session_status() === PHP_SESSION_NONE) {
@@ -12,35 +12,35 @@ class ResenaController extends Controller {
             $this->redirect('');
         }
 
-        $this->resenaModel = $this->model('Resena');
+        $this->historialModel = $this->model('Historial');
     }
 
     public function index() {
-        $this->view('admin/resena');
+        $this->view('admin/historial');
     }
 
     public function apiList() {
         header('Content-Type: application/json');
 
         echo json_encode(
-            $this->resenaModel->getAll()
+            $this->historialModel->getAll()
         );
     }
 
     public function apiShow($id) {
         header('Content-Type: application/json');
 
-        $resena = $this->resenaModel->getById($id);
+        $historial = $this->historialModel->getById($id);
 
-        if ($resena) {
+        if ($historial) {
             echo json_encode([
                 'success' => true,
-                'data' => $resena
+                'data' => $historial
             ]);
         } else {
             echo json_encode([
                 'success' => false,
-                'message' => 'Reseña no encontrada'
+                'message' => 'Historial no encontrado'
             ]);
         }
     }
@@ -55,9 +55,9 @@ class ResenaController extends Controller {
 
         if (
             !isset($data['user_id']) ||
-            empty($data['nombre']) ||
-            empty($data['comentario']) ||
-            !isset($data['calificacion'])
+            empty($data['producto']) ||
+            empty($data['fecha']) ||
+            empty($data['estado'])
         ) {
             echo json_encode([
                 'success' => false,
@@ -67,13 +67,13 @@ class ResenaController extends Controller {
             return;
         }
 
-        $resultado = $this->resenaModel->create($data);
+        $resultado = $this->historialModel->create($data);
 
         echo json_encode([
             'success' => (bool) $resultado,
             'message' => $resultado
-                ? 'Reseña creada correctamente'
-                : 'Error al crear la reseña',
+                ? 'Historial creado correctamente'
+                : 'Error al crear el historial',
         ]);
     }
 
@@ -87,9 +87,9 @@ class ResenaController extends Controller {
 
         if (
             !isset($data['user_id']) ||
-            empty($data['nombre']) ||
-            empty($data['comentario']) ||
-            !isset($data['calificacion'])
+            empty($data['producto']) ||
+            empty($data['fecha']) ||
+            empty($data['estado'])
         ) {
             echo json_encode([
                 'success' => false,
@@ -99,7 +99,7 @@ class ResenaController extends Controller {
             return;
         }
 
-        $resultado = $this->resenaModel->update(
+        $resultado = $this->historialModel->update(
             $id,
             $data
         );
@@ -107,21 +107,21 @@ class ResenaController extends Controller {
         echo json_encode([
             'success' => (bool) $resultado,
             'message' => $resultado
-                ? 'Reseña actualizada correctamente'
-                : 'Error al actualizar la reseña',
+                ? 'Historial actualizado correctamente'
+                : 'Error al actualizar el historial',
         ]);
     }
 
     public function apiDelete($id) {
         header('Content-Type: application/json');
 
-        $resultado = $this->resenaModel->delete($id);
+        $resultado = $this->historialModel->delete($id);
 
         echo json_encode([
             'success' => (bool) $resultado,
             'message' => $resultado
-                ? 'Reseña eliminada correctamente'
-                : 'Error al eliminar la reseña',
+                ? 'Historial eliminado correctamente'
+                : 'Error al eliminar el historial',
         ]);
     }
 }

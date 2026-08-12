@@ -1,7 +1,7 @@
 <?php
 require_once '../app/config/Database.php';
 
-class Resena {
+class Factura {
     private $db;
 
     public function __construct() {
@@ -9,22 +9,22 @@ class Resena {
     }
 
     public function getAll() {
-        $query = "SELECT * FROM resenas ORDER BY id DESC";
+        $query = "SELECT * FROM factura ORDER BY id DESC";
         $result = $this->db->query($query);
 
-        $resenas = [];
+        $facturas = [];
 
         if ($result && $result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $resenas[] = $row;
+                $facturas[] = $row;
             }
         }
 
-        return $resenas;
+        return $facturas;
     }
 
     public function getById($id) {
-        $query = "SELECT * FROM resenas WHERE id = ?";
+        $query = "SELECT * FROM factura WHERE id = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -35,39 +35,35 @@ class Resena {
     }
 
     public function create($data) {
-        $query = "INSERT INTO resenas
-                  (user_id, nombre, comentario, calificacion)
+        $query = "INSERT INTO factura (fecha, total, estado, user_id)
                   VALUES (?, ?, ?, ?)";
 
         $stmt = $this->db->prepare($query);
 
         $stmt->bind_param(
-            "issi",
-            $data['user_id'],
-            $data['nombre'],
-            $data['comentario'],
-            $data['calificacion']
+            "sdsi",
+            $data['fecha'],
+            $data['total'],
+            $data['estado'],
+            $data['user_id']
         );
 
         return $stmt->execute();
     }
 
     public function update($id, $data) {
-        $query = "UPDATE resenas
-                  SET user_id = ?,
-                      nombre = ?,
-                      comentario = ?,
-                      calificacion = ?
+        $query = "UPDATE factura
+                  SET fecha = ?, total = ?, estado = ?, user_id = ?
                   WHERE id = ?";
 
         $stmt = $this->db->prepare($query);
 
         $stmt->bind_param(
-            "issii",
+            "sdsii",
+            $data['fecha'],
+            $data['total'],
+            $data['estado'],
             $data['user_id'],
-            $data['nombre'],
-            $data['comentario'],
-            $data['calificacion'],
             $id
         );
 
@@ -75,7 +71,7 @@ class Resena {
     }
 
     public function delete($id) {
-        $query = "DELETE FROM resenas WHERE id = ?";
+        $query = "DELETE FROM factura WHERE id = ?";
 
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("i", $id);

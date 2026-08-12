@@ -1,7 +1,7 @@
 <?php
 
-class ResenaController extends Controller {
-    private $resenaModel;
+class VentaController extends Controller {
+    private $ventaModel;
 
     public function __construct() {
         if (session_status() === PHP_SESSION_NONE) {
@@ -12,35 +12,35 @@ class ResenaController extends Controller {
             $this->redirect('');
         }
 
-        $this->resenaModel = $this->model('Resena');
+        $this->ventaModel = $this->model('Venta');
     }
 
     public function index() {
-        $this->view('admin/resena');
+        $this->view('admin/ventas');
     }
 
     public function apiList() {
         header('Content-Type: application/json');
 
         echo json_encode(
-            $this->resenaModel->getAll()
+            $this->ventaModel->getAll()
         );
     }
 
     public function apiShow($id) {
         header('Content-Type: application/json');
 
-        $resena = $this->resenaModel->getById($id);
+        $venta = $this->ventaModel->getById($id);
 
-        if ($resena) {
+        if ($venta) {
             echo json_encode([
                 'success' => true,
-                'data' => $resena
+                'data' => $venta
             ]);
         } else {
             echo json_encode([
                 'success' => false,
-                'message' => 'Reseña no encontrada'
+                'message' => 'Venta no encontrada'
             ]);
         }
     }
@@ -54,10 +54,12 @@ class ResenaController extends Controller {
         );
 
         if (
-            !isset($data['user_id']) ||
-            empty($data['nombre']) ||
-            empty($data['comentario']) ||
-            !isset($data['calificacion'])
+            !isset($data['cantidad']) ||
+            !isset($data['precio']) ||
+            !isset($data['factura_id']) ||
+            !isset($data['placa_id']) ||
+            !isset($data['material_id']) ||
+            !isset($data['tamano_id'])
         ) {
             echo json_encode([
                 'success' => false,
@@ -67,13 +69,13 @@ class ResenaController extends Controller {
             return;
         }
 
-        $resultado = $this->resenaModel->create($data);
+        $resultado = $this->ventaModel->create($data);
 
         echo json_encode([
             'success' => (bool) $resultado,
             'message' => $resultado
-                ? 'Reseña creada correctamente'
-                : 'Error al crear la reseña',
+                ? 'Venta creada correctamente'
+                : 'Error al crear la venta',
         ]);
     }
 
@@ -86,10 +88,12 @@ class ResenaController extends Controller {
         );
 
         if (
-            !isset($data['user_id']) ||
-            empty($data['nombre']) ||
-            empty($data['comentario']) ||
-            !isset($data['calificacion'])
+            !isset($data['cantidad']) ||
+            !isset($data['precio']) ||
+            !isset($data['factura_id']) ||
+            !isset($data['placa_id']) ||
+            !isset($data['material_id']) ||
+            !isset($data['tamano_id'])
         ) {
             echo json_encode([
                 'success' => false,
@@ -99,7 +103,7 @@ class ResenaController extends Controller {
             return;
         }
 
-        $resultado = $this->resenaModel->update(
+        $resultado = $this->ventaModel->update(
             $id,
             $data
         );
@@ -107,21 +111,21 @@ class ResenaController extends Controller {
         echo json_encode([
             'success' => (bool) $resultado,
             'message' => $resultado
-                ? 'Reseña actualizada correctamente'
-                : 'Error al actualizar la reseña',
+                ? 'Venta actualizada correctamente'
+                : 'Error al actualizar la venta',
         ]);
     }
 
     public function apiDelete($id) {
         header('Content-Type: application/json');
 
-        $resultado = $this->resenaModel->delete($id);
+        $resultado = $this->ventaModel->delete($id);
 
         echo json_encode([
             'success' => (bool) $resultado,
             'message' => $resultado
-                ? 'Reseña eliminada correctamente'
-                : 'Error al eliminar la reseña',
+                ? 'Venta eliminada correctamente'
+                : 'Error al eliminar la venta',
         ]);
     }
 }

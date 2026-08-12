@@ -1,7 +1,7 @@
 <?php
 
-class ResenaController extends Controller {
-    private $resenaModel;
+class EstadisticaController extends Controller {
+    private $estadisticaModel;
 
     public function __construct() {
         if (session_status() === PHP_SESSION_NONE) {
@@ -12,35 +12,35 @@ class ResenaController extends Controller {
             $this->redirect('');
         }
 
-        $this->resenaModel = $this->model('Resena');
+        $this->estadisticaModel = $this->model('Estadistica');
     }
 
     public function index() {
-        $this->view('admin/resena');
+        $this->view('admin/estadisticas');
     }
 
     public function apiList() {
         header('Content-Type: application/json');
 
         echo json_encode(
-            $this->resenaModel->getAll()
+            $this->estadisticaModel->getAll()
         );
     }
 
     public function apiShow($id) {
         header('Content-Type: application/json');
 
-        $resena = $this->resenaModel->getById($id);
+        $estadistica = $this->estadisticaModel->getById($id);
 
-        if ($resena) {
+        if ($estadistica) {
             echo json_encode([
                 'success' => true,
-                'data' => $resena
+                'data' => $estadistica
             ]);
         } else {
             echo json_encode([
                 'success' => false,
-                'message' => 'Reseña no encontrada'
+                'message' => 'Estadística no encontrada'
             ]);
         }
     }
@@ -54,26 +54,24 @@ class ResenaController extends Controller {
         );
 
         if (
-            !isset($data['user_id']) ||
-            empty($data['nombre']) ||
-            empty($data['comentario']) ||
-            !isset($data['calificacion'])
+            empty($data['description']) ||
+            empty($data['value'])
         ) {
             echo json_encode([
                 'success' => false,
-                'message' => 'Todos los campos son requeridos'
+                'message' => 'Descripción y valor son requeridos'
             ]);
 
             return;
         }
 
-        $resultado = $this->resenaModel->create($data);
+        $resultado = $this->estadisticaModel->create($data);
 
         echo json_encode([
             'success' => (bool) $resultado,
             'message' => $resultado
-                ? 'Reseña creada correctamente'
-                : 'Error al crear la reseña',
+                ? 'Estadística creada correctamente'
+                : 'Error al crear la estadística'
         ]);
     }
 
@@ -86,20 +84,18 @@ class ResenaController extends Controller {
         );
 
         if (
-            !isset($data['user_id']) ||
-            empty($data['nombre']) ||
-            empty($data['comentario']) ||
-            !isset($data['calificacion'])
+            empty($data['description']) ||
+            empty($data['value'])
         ) {
             echo json_encode([
                 'success' => false,
-                'message' => 'Todos los campos son requeridos'
+                'message' => 'Descripción y valor son requeridos'
             ]);
 
             return;
         }
 
-        $resultado = $this->resenaModel->update(
+        $resultado = $this->estadisticaModel->update(
             $id,
             $data
         );
@@ -107,21 +103,21 @@ class ResenaController extends Controller {
         echo json_encode([
             'success' => (bool) $resultado,
             'message' => $resultado
-                ? 'Reseña actualizada correctamente'
-                : 'Error al actualizar la reseña',
+                ? 'Estadística actualizada correctamente'
+                : 'Error al actualizar la estadística'
         ]);
     }
 
     public function apiDelete($id) {
         header('Content-Type: application/json');
 
-        $resultado = $this->resenaModel->delete($id);
+        $resultado = $this->estadisticaModel->delete($id);
 
         echo json_encode([
             'success' => (bool) $resultado,
             'message' => $resultado
-                ? 'Reseña eliminada correctamente'
-                : 'Error al eliminar la reseña',
+                ? 'Estadística eliminada correctamente'
+                : 'Error al eliminar la estadística'
         ]);
     }
 }

@@ -1,9 +1,9 @@
 <?php
 $activePage = 'admin';
-$pageTitle = 'Historial | Admin';
+$pageTitle = 'Reseñas | Admin';
 require_once '../app/views/layouts/header.php';
 
-$adminSection = 'historial';
+$adminSection = 'resena';
 ?>
 
 <section class="cdp-catalogo">
@@ -11,14 +11,14 @@ $adminSection = 'historial';
 
         <div class="cdp-admin-header">
 
-            <h1>Historial</h1>
+            <h1>Reseñas</h1>
 
             <button type="button"
                     class="btn btn-primary"
-                    id="btnNuevoHistorial">
+                    id="btnNuevaResena">
 
                 <i class="bi bi-plus-lg"></i>
-                Nuevo Historial
+                Nueva Reseña
 
             </button>
 
@@ -43,20 +43,20 @@ $adminSection = 'historial';
             </div>
 
             <table class="cdp-admin-table d-none"
-                   id="historialTable">
+                   id="resenasTable">
 
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>ID Usuario</th>
-                        <th>Producto</th>
-                        <th>Fecha</th>
-                        <th>Estado</th>
+                        <th>Nombre</th>
+                        <th>Comentario</th>
+                        <th>Calificación</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
 
-                <tbody id="historialTBody">
+                <tbody id="resenasTBody">
                 </tbody>
 
             </table>
@@ -68,14 +68,14 @@ $adminSection = 'historial';
 
 
 <div class="cdp-admin-modal-overlay"
-     id="historialModal">
+     id="resenaModal">
 
     <div class="cdp-admin-modal">
 
         <div class="cdp-admin-modal-header">
 
             <h3 id="modalTitle">
-                Nuevo Historial
+                Nueva Reseña
             </h3>
 
             <button type="button"
@@ -89,73 +89,76 @@ $adminSection = 'historial';
         </div>
 
 
-        <form id="historialForm">
+        <form id="resenaForm">
 
             <input type="hidden"
-                   id="historialId"
+                   id="resenaId"
                    name="id">
 
 
             <div class="cdp-admin-form-group">
 
-                <label for="historialUsuario">
+                <label for="resenaUsuario">
                     ID Usuario
                 </label>
 
                 <input type="number"
-                       id="historialUsuario"
+                       id="resenaUsuario"
                        name="user_id"
                        class="form-control"
                        min="1"
                        required
-                       placeholder="Ej: 1">
+                       placeholder="Ej: 2">
 
             </div>
 
 
             <div class="cdp-admin-form-group">
 
-                <label for="historialProducto">
-                    Producto
+                <label for="resenaNombre">
+                    Nombre
                 </label>
 
                 <input type="text"
-                       id="historialProducto"
-                       name="producto"
+                       id="resenaNombre"
+                       name="nombre"
                        class="form-control"
                        required
-                       placeholder="Ej: Placa de mármol blanco">
+                       placeholder="Ej: Jimena Rojas">
 
             </div>
 
 
             <div class="cdp-admin-form-group">
 
-                <label for="historialFecha">
-                    Fecha
+                <label for="resenaComentario">
+                    Comentario
                 </label>
 
-                <input type="date"
-                       id="historialFecha"
-                       name="fecha"
-                       class="form-control"
-                       required>
+                <textarea id="resenaComentario"
+                          name="comentario"
+                          class="form-control"
+                          rows="3"
+                          required
+                          placeholder="Comentario de la reseña"></textarea>
 
             </div>
 
 
             <div class="cdp-admin-form-group">
 
-                <label for="historialEstado">
-                    Estado
+                <label for="resenaCalificacion">
+                    Calificación
                 </label>
 
-                <input type="text"
-                       id="historialEstado"
-                       name="estado"
+                <input type="number"
+                       id="resenaCalificacion"
+                       name="calificacion"
                        class="form-control"
+                       min="1"
+                       max="5"
                        required
-                       placeholder="Ej: Entregado">
+                       placeholder="Ej: 5">
 
             </div>
 
@@ -164,7 +167,7 @@ $adminSection = 'historial';
 
                 <button type="button"
                         class="btn btn-outline-secondary"
-                        onclick="document.getElementById('historialModal').classList.remove('active')">
+                        onclick="document.getElementById('resenaModal').classList.remove('active')">
 
                     Cancelar
 
@@ -193,6 +196,6 @@ $adminSection = 'historial';
     const ROOT_URL = "<?= ROOT_URL ?>";
 </script>
 
-<script src="<?= ROOT_URL ?>js/historial.js"></script>
+<script src="<?= ROOT_URL ?>js/resena.js"></script>
 
 <?php require_once '../app/views/layouts/footer.php'; ?>

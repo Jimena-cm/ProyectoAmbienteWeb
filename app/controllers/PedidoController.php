@@ -1,10 +1,8 @@
-
 <?php
 
 class PedidoController extends Controller
 {
     private $pedidoModel;
-    private $carritoModel;
 
     public function __construct()
     {
@@ -17,18 +15,30 @@ class PedidoController extends Controller
         }
 
         $this->pedidoModel = $this->model('Pedido');
-        $this->carritoModel = $this->model('Carrito');
+    }
+
+    public function index()
+    {
+        $pedidos = $this->pedidoModel->obtenerPorUsuario(
+            $_SESSION['user_id']
+        );
+
+        $this->view('pedido/index', [
+            'pedidos' => $pedidos
+        ]);
     }
 
     public function confirmar()
     {
-        $carrito = $this->carritoModel->obtener();
+        $carritoModel = $this->model('Carrito');
+
+        $carrito = $carritoModel->obtener();
 
         if (empty($carrito)) {
             $this->redirect('carrito');
         }
 
-        $total = $this->carritoModel->calcularTotal();
+        $total = $carritoModel->calcularTotal();
 
         $pedidoId = $this->pedidoModel->crear(
             $_SESSION['user_id'],
@@ -38,12 +48,12 @@ class PedidoController extends Controller
 
         if ($pedidoId) {
 
-            $this->carritoModel->vaciar();
+            $carritoModel->vaciar();
 
             $_SESSION['pedido_mensaje'] =
                 'Tu pedido fue registrado correctamente.';
 
-            $this->redirect('pedido/historial');
+            $this->redirect('pedido');
         }
 
         $_SESSION['pedido_error'] =
@@ -52,15 +62,10 @@ class PedidoController extends Controller
         $this->redirect('carrito');
     }
 
-    public function historial()
+    public function eliminar($id)
     {
-        $pedidos = $this->pedidoModel->obtenerPorUsuario(
-            $_SESSION['user_id']
-        );
+        $this->pedidoModel->eliminar($id);
 
-        $this->view('pedido/historial', [
-            'pedidos' => $pedidos
-        ]);
+        $this->redirect('pedido');
     }
 }
-    
