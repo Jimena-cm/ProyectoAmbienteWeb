@@ -5,6 +5,8 @@ class App {
     protected $params = [];
 
     public function __construct() {
+        require_once __DIR__ . '/Controller.php';
+
         $url = $this->parseUrl();
 
         if (isset($url[0]) && file_exists('../app/controllers/' . ucfirst($url[0]) . 'Controller.php')) {
