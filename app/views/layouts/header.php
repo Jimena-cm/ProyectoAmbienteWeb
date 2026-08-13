@@ -1,11 +1,4 @@
 <?php
-// Este header se incluye DIRECTO desde cada vista con require_once, no lo llama el controller.
-// La vista debe definir $activePage y $pageTitle ANTES de este require (opcional, tiene default).
-
-// FIX: header.php usa la clase Database directamente (para la foto de perfil),
-// pero no todos los controllers cargan un modelo antes de renderizar la vista
-// (AdminController, por ejemplo, no tiene modelo). Por eso se carga aquí mismo,
-// sin depender de que algo más lo haya hecho antes.
 require_once __DIR__ . '/../../config/Database.php';
 
 if (!isset($activePage)) {
@@ -112,7 +105,6 @@ if ($fotoPerfil === '' || $fotoPerfil === 'usuario.jpg') {
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="<?= BASE_URL ?>perfil">Información de mi cuenta</a></li>
-                            <li><a class="dropdown-item" href="<?= BASE_URL ?>contacto">Atención al cliente</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item text-danger" href="<?= BASE_URL ?>auth/logout">Cerrar sesión</a></li>
                         </ul>
