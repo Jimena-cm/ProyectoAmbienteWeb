@@ -15,9 +15,6 @@ $seccionesAdmin = [
     'venta'        => 'Ventas',
     'historial'    => 'Historial',
     'resena'       => 'Reseñas',
-    'contacto'     => 'Contacto',
-    'soporte'      => 'Soporte',
-    'cuenta'       => 'Cuentas',
     'estadistica'  => 'Estadísticas',
 ];
 ?>
